@@ -11,6 +11,8 @@ on:
 jobs:
   update-dashboard:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
       - name: Checkout repository
@@ -28,6 +30,7 @@ jobs:
       - name: Generate dashboard
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          USERNAME: ${{ secrets.USERNAME }}
         run: |
           cd src
           python main.py
