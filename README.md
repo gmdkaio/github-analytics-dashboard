@@ -1,6 +1,6 @@
 # GitHub Analytics Dashboard
 
-Automated data pipeline that fetches repository data from the GitHub API and generates professional analytics visualizations.
+Automated data pipeline that fetches repository data from the GitHub API and generates data visualizations.
 
 ## Dashboard Preview
 
