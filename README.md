@@ -2,7 +2,9 @@
 
 Automated data pipeline that fetches repository data from the GitHub API and generates professional analytics visualizations.
 
-![Dashboard Preview](data/github_dashboard.svg)
+## Dashboard Preview
+
+![GitHub Analytics Dashboard](data/github_dashboard.svg)
 
 ## Features
 
@@ -90,3 +92,27 @@ The pipeline calculates:
 ## License
 
 MIT License
+
+---
+
+## Auto-Update with GitHub Actions
+
+This repository includes a GitHub Action that automatically updates the dashboard daily at midnight UTC.
+
+**Manual Trigger:** Go to Actions tab → "Update GitHub Analytics Dashboard" → Run workflow
+
+**Schedule:** Daily at 00:00 UTC (configurable in `.github/workflows/update-dashboard.yml`)
+
+## Using in Your GitHub Profile
+
+To display this dashboard in your GitHub profile README:
+
+1. Make sure this repository is public
+2. Enable GitHub Actions in repository settings
+3. Add to your profile README (replace `YOUR_USERNAME` and `REPO_NAME`):
+
+```markdown
+![GitHub Analytics](https://raw.githubusercontent.com/YOUR_USERNAME/REPO_NAME/main/data/github_dashboard.svg)
+```
+
+The dashboard will automatically update daily via GitHub Actions.

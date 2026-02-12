@@ -8,9 +8,7 @@ venv/
 
 .env
 
-data/*.csv
-data/*.svg
-data/*.png
+notebooks/
 
 .DS_Store
 Thumbs.db
