@@ -5,7 +5,7 @@ cpu-temp-manager,https://github.com/gmdkaio/cpu-temp-manager,False,C,1,0,0,9,Fal
 crm,https://github.com/gmdkaio/crm,True,,0,0,0,175,False,2025-10-13 13:43:01+00:00,2025-10-13 13:35:01+00:00,0.1708984375,2025,121,False
 datacleaningprflls,https://github.com/gmdkaio/datacleaningprflls,False,Jupyter Notebook,0,0,0,13,False,2025-10-29 13:20:23+00:00,2025-11-06 16:25:41+00:00,0.0126953125,2025,97,False
 freecodecamp-ml,https://github.com/gmdkaio/freecodecamp-ml,True,,0,0,0,0,False,2026-01-21 08:44:12+00:00,2026-01-21 08:44:13+00:00,0.0,2026,21,True
-github-analytics-dashboard,https://github.com/gmdkaio/github-analytics-dashboard,False,Python,2,0,0,34,False,2026-02-11 23:13:56+00:00,2026-02-12 04:25:44+00:00,0.033203125,2026,0,True
+github-analytics-dashboard,https://github.com/gmdkaio/github-analytics-dashboard,False,Python,2,0,0,34,False,2026-02-11 23:13:56+00:00,2026-02-12 04:26:08+00:00,0.033203125,2026,0,True
 gmdkaio,https://github.com/gmdkaio/gmdkaio,False,,1,0,0,27,False,2025-10-13 13:47:16+00:00,2026-02-12 01:30:33+00:00,0.0263671875,2025,0,True
 House-prices-analysis-,https://github.com/gmdkaio/House-prices-analysis-,False,Jupyter Notebook,0,0,0,486,False,2025-11-27 22:52:10+00:00,2025-11-28 00:12:38+00:00,0.474609375,2025,76,True
 litro-scrape,https://github.com/gmdkaio/litro-scrape,True,,0,0,1,2,False,2026-01-29 12:40:41+00:00,2026-01-29 12:43:14+00:00,0.001953125,2026,13,True
