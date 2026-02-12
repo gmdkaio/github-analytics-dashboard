@@ -1,22 +1,22 @@
 name,url,private,language,stars,forks,open_issues,size_kb,archived,created_at,pushed_at,size_mb,year_created,days_since_last_push,is_active
-adguard,https://github.com/gmdkaio/adguard,False,Python,1,0,0,559,False,2026-01-16 06:42:30+00:00,2026-01-16 19:37:37+00:00,0.5458984375,2026,26,True
-api-desafio,https://github.com/gmdkaio/api-desafio,False,JavaScript,0,0,0,5,False,2025-11-29 16:37:16+00:00,2025-11-29 16:44:23+00:00,0.0048828125,2025,74,True
-cpu-temp-manager,https://github.com/gmdkaio/cpu-temp-manager,False,C,1,0,0,9,False,2026-01-12 03:10:39+00:00,2026-01-12 05:37:16+00:00,0.0087890625,2026,30,True
-crm,https://github.com/gmdkaio/crm,True,,0,0,0,175,False,2025-10-13 13:43:01+00:00,2025-10-13 13:35:01+00:00,0.1708984375,2025,121,False
-datacleaningprflls,https://github.com/gmdkaio/datacleaningprflls,False,Jupyter Notebook,0,0,0,13,False,2025-10-29 13:20:23+00:00,2025-11-06 16:25:41+00:00,0.0126953125,2025,97,False
-freecodecamp-ml,https://github.com/gmdkaio/freecodecamp-ml,True,,0,0,0,0,False,2026-01-21 08:44:12+00:00,2026-01-21 08:44:13+00:00,0.0,2026,21,True
-github-analytics-dashboard,https://github.com/gmdkaio/github-analytics-dashboard,False,Python,3,0,0,34,False,2026-02-11 23:13:56+00:00,2026-02-12 05:04:05+00:00,0.033203125,2026,0,True
-gmdkaio,https://github.com/gmdkaio/gmdkaio,False,,1,0,0,27,False,2025-10-13 13:47:16+00:00,2026-02-12 01:30:33+00:00,0.0263671875,2025,0,True
+adguard,https://github.com/gmdkaio/adguard,False,Python,1,0,0,560,False,2026-01-16 06:42:30+00:00,2026-02-12 05:47:45+00:00,0.546875,2026,0,True
+api-desafio,https://github.com/gmdkaio/api-desafio,False,JavaScript,0,0,0,5,False,2025-11-29 16:37:16+00:00,2025-11-29 16:44:23+00:00,0.0048828125,2025,75,True
+cpu-temp-manager,https://github.com/gmdkaio/cpu-temp-manager,False,C,1,0,0,9,False,2026-01-12 03:10:39+00:00,2026-01-12 05:37:16+00:00,0.0087890625,2026,31,True
+crm,https://github.com/gmdkaio/crm,True,,0,0,0,175,False,2025-10-13 13:43:01+00:00,2025-10-13 13:35:01+00:00,0.1708984375,2025,122,False
+datacleaningprflls,https://github.com/gmdkaio/datacleaningprflls,False,Jupyter Notebook,0,0,0,13,False,2025-10-29 13:20:23+00:00,2025-11-06 16:25:41+00:00,0.0126953125,2025,98,False
+freecodecamp-ml,https://github.com/gmdkaio/freecodecamp-ml,True,,0,0,0,0,False,2026-01-21 08:44:12+00:00,2026-01-21 08:44:13+00:00,0.0,2026,22,True
+github-analytics-dashboard,https://github.com/gmdkaio/github-analytics-dashboard,False,Python,5,0,0,59,False,2026-02-11 23:13:56+00:00,2026-02-12 05:04:26+00:00,0.0576171875,2026,0,True
+gmdkaio,https://github.com/gmdkaio/gmdkaio,False,,1,0,0,31,False,2025-10-13 13:47:16+00:00,2026-02-12 05:06:43+00:00,0.0302734375,2025,0,True
 House-prices-analysis-,https://github.com/gmdkaio/House-prices-analysis-,False,Jupyter Notebook,0,0,0,486,False,2025-11-27 22:52:10+00:00,2025-11-28 00:12:38+00:00,0.474609375,2025,76,True
-litro-scrape,https://github.com/gmdkaio/litro-scrape,True,,0,0,1,2,False,2026-01-29 12:40:41+00:00,2026-01-29 12:43:14+00:00,0.001953125,2026,13,True
-lucija,https://github.com/gmdkaio/lucija,True,JavaScript,0,0,0,1614,False,2026-01-10 04:50:17+00:00,2026-01-10 05:41:14+00:00,1.576171875,2026,32,True
-scrape-cg,https://github.com/gmdkaio/scrape-cg,False,Jupyter Notebook,0,0,0,11,False,2026-02-03 12:41:21+00:00,2026-02-03 13:39:07+00:00,0.0107421875,2026,8,True
+litro-scrape,https://github.com/gmdkaio/litro-scrape,True,,0,0,1,2,False,2026-01-29 12:40:41+00:00,2026-01-29 12:43:14+00:00,0.001953125,2026,14,True
+lucija,https://github.com/gmdkaio/lucija,True,JavaScript,0,0,0,1614,False,2026-01-10 04:50:17+00:00,2026-01-10 05:41:14+00:00,1.576171875,2026,33,True
+scrape-cg,https://github.com/gmdkaio/scrape-cg,False,Jupyter Notebook,0,0,0,11,False,2026-02-03 12:41:21+00:00,2026-02-03 13:39:07+00:00,0.0107421875,2026,9,True
 site,https://github.com/gmdkaio/site,True,Python,0,0,0,11684,False,2023-06-27 19:21:25+00:00,2023-11-10 18:59:17+00:00,11.41015625,2023,824,False
-smtp,https://github.com/gmdkaio/smtp,False,Python,0,0,0,1,False,2024-09-17 11:28:25+00:00,2024-09-17 14:01:55+00:00,0.0009765625,2024,512,False
+smtp,https://github.com/gmdkaio/smtp,False,Python,0,0,0,1,False,2024-09-17 11:28:25+00:00,2024-09-17 14:01:55+00:00,0.0009765625,2024,513,False
 swte,https://github.com/gmdkaio/swte,True,HTML,0,0,0,3806,False,2025-01-06 18:27:04+00:00,2025-01-06 20:32:18+00:00,3.716796875,2025,401,False
-webscrapecetro,https://github.com/gmdkaio/webscrapecetro,True,Jupyter Notebook,0,0,0,1926,False,2025-03-19 11:44:45+00:00,2025-03-27 11:48:25+00:00,1.880859375,2025,321,False
+webscrapecetro,https://github.com/gmdkaio/webscrapecetro,True,Jupyter Notebook,0,0,0,1926,False,2025-03-19 11:44:45+00:00,2025-03-27 11:48:25+00:00,1.880859375,2025,322,False
 webscrape_IEexpoChina,https://github.com/gmdkaio/webscrape_IEexpoChina,False,Python,0,0,0,19,False,2024-04-25 17:27:55+00:00,2024-04-25 18:51:58+00:00,0.0185546875,2024,657,False
-webscrape_MAPA,https://github.com/gmdkaio/webscrape_MAPA,False,Python,0,0,0,8,False,2023-10-22 23:04:05+00:00,2023-11-07 17:14:18+00:00,0.0078125,2023,827,False
-webscrape_PMMI,https://github.com/gmdkaio/webscrape_PMMI,False,Python,0,0,0,580,False,2023-11-13 17:25:44+00:00,2023-11-17 13:06:16+00:00,0.56640625,2023,817,False
+webscrape_MAPA,https://github.com/gmdkaio/webscrape_MAPA,False,Python,0,0,0,8,False,2023-10-22 23:04:05+00:00,2023-11-07 17:14:18+00:00,0.0078125,2023,828,False
+webscrape_PMMI,https://github.com/gmdkaio/webscrape_PMMI,False,Python,0,0,0,580,False,2023-11-13 17:25:44+00:00,2023-11-17 13:06:16+00:00,0.56640625,2023,818,False
 ytdownload,https://github.com/gmdkaio/ytdownload,False,Python,0,0,0,0,False,2024-09-12 19:01:49+00:00,2024-09-12 20:04:59+00:00,0.0,2024,517,False
-ytsummarizer,https://github.com/gmdkaio/ytsummarizer,False,Python,0,0,0,4,False,2024-09-09 07:22:18+00:00,2024-09-09 10:52:24+00:00,0.00390625,2024,520,False
+ytsummarizer,https://github.com/gmdkaio/ytsummarizer,False,Python,0,0,0,4,False,2024-09-09 07:22:18+00:00,2024-09-09 10:52:24+00:00,0.00390625,2024,521,False
