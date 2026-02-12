@@ -13,6 +13,7 @@ def repos_to_dataframe(repos):
     for repo in repos:
         records.append({
             "name": repo.get("name"),
+            "url": repo.get("html_url"),
             "private": repo.get("private"),
             "language": repo.get("language"),
             "stars": repo.get("stargazers_count", 0),

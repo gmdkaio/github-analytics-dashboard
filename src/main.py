@@ -30,7 +30,7 @@ def main():
     
     logger.info("Generating dashboard...")
     create_dashboard(df, output_path=DASHBOARD_OUTPUT)
-    logger.info(f"✓ Complete! {DASHBOARD_OUTPUT}")
+    logger.info(f"Complete! {DASHBOARD_OUTPUT}")
 
 
 if __name__ == "__main__":
