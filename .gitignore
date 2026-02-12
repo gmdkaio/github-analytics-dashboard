@@ -1,16 +1,18 @@
-# Python cache
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Virtual environment
 .venv/
 venv/
 
-# Environment variables
 .env
 
-# OS files
+data/*.csv
+data/*.svg
+data/*.png
+
 .DS_Store
 Thumbs.db
+
+*.ipynb_checkpoints
