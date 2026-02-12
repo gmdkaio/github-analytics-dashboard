@@ -3,6 +3,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, Rectangle
 import logging
+import re
 
 logger = logging.getLogger(__name__)
 
@@ -121,20 +122,66 @@ def create_dashboard(df: pd.DataFrame, output_path: str = "github_dashboard.svg"
         autotext.set_weight('bold')
     ax2.set_title("Language Distribution", fontsize=15, pad=15, weight="bold")
 
-    recent_repos = df.nsmallest(5, 'days_since_last_push')[['name', 'days_since_last_push']].copy()
+    # Professional table for recently updated repos
     ax3 = fig.add_subplot(gs[2, 2:])
-    update_colors = [GREEN, BLUE, PURPLE, ORANGE, PINK]
-    bars = ax3.barh(recent_repos["name"], recent_repos["days_since_last_push"], 
-                    color=update_colors[:len(recent_repos)], edgecolor=BG, linewidth=2)
-    ax3.set_title("Most Recently Updated", fontsize=15, pad=15, weight="bold")
-    ax3.set_xlabel("Days Ago", fontsize=11, weight="600")
-    ax3.set_ylabel("")
-    ax3.tick_params(axis='y', labelsize=10)
-    ax3.invert_xaxis()
-    for i, (bar, days) in enumerate(zip(bars, recent_repos["days_since_last_push"])):
-        ax3.text(days - 1, bar.get_y() + bar.get_height()/2, 
-                str(int(days)) + 'd', va='center', color=TEXT, fontsize=9, weight='bold')
-    ax3.grid(axis='x', alpha=0.2)
+    ax3.axis('off')
+    
+    # Get top 5 recent repos with URL if available
+    cols_to_select = ['name', 'language', 'stars', 'days_since_last_push']
+    if 'url' in df.columns:
+        cols_to_select.insert(1, 'url')
+    
+    recent_repos = df.nsmallest(5, 'days_since_last_push')[cols_to_select].copy()
+    recent_repos['language'] = recent_repos['language'].fillna('N/A')
+    
+    # Title
+    ax3.text(0.5, 0.95, "Most Recently Updated", ha='center', fontsize=14, 
+            weight='bold', color=TEXT, transform=ax3.transAxes)
+    
+    # Column headers
+    header_y = 0.87
+    ax3.text(0.05, header_y, "Name", fontsize=10, weight='bold', color=TEXT_MUTED, transform=ax3.transAxes)
+    ax3.text(0.45, header_y, "Stars", fontsize=10, weight='bold', color=TEXT_MUTED, transform=ax3.transAxes)
+    ax3.text(0.60, header_y, "Language", fontsize=10, weight='bold', color=TEXT_MUTED, transform=ax3.transAxes)
+    ax3.text(0.82, header_y, "Last Update", fontsize=10, weight='bold', color=TEXT_MUTED, transform=ax3.transAxes, ha='right')
+    
+    # Header line
+    ax3.plot([0.05, 0.95], [header_y - 0.025, header_y - 0.025], color=BORDER, linewidth=1, transform=ax3.transAxes)
+    
+    # Table rows
+    row_height = 0.14
+    start_y = header_y - 0.06
+    
+    for i, (_, row) in enumerate(recent_repos.iterrows()):
+        y_pos = start_y - (i * row_height)
+        
+        # Subtle separator line
+        if i > 0:
+            ax3.plot([0.05, 0.95], [y_pos + 0.07, y_pos + 0.07], color=BORDER, linewidth=0.5, alpha=0.3, transform=ax3.transAxes)
+        
+        # Name
+        ax3.text(0.05, y_pos, row['name'], fontsize=10, weight='600', 
+                color=TEXT, transform=ax3.transAxes, va='center')
+        
+        # Stars
+        ax3.text(0.45, y_pos, str(int(row['stars'])), fontsize=10, 
+                color=TEXT, transform=ax3.transAxes, va='center')
+        
+        # Language
+        lang = row['language'] if row['language'] else 'N/A'
+        ax3.text(0.60, y_pos, lang, fontsize=10, 
+                color=TEXT, transform=ax3.transAxes, va='center')
+        
+        # Last update
+        days = int(row['days_since_last_push'])
+        if days == 0:
+            time_text = "Today"
+        elif days == 1:
+            time_text = "1 day ago"
+        else:
+            time_text = f"{days} days ago"
+        ax3.text(0.95, y_pos, time_text, fontsize=10,
+                color=TEXT_MUTED, transform=ax3.transAxes, va='center', ha='right')
 
     ax4 = fig.add_subplot(gs[3, 2])
     sns.histplot(df["size_mb"], bins=15, kde=True, color=PURPLE, 
@@ -167,4 +214,34 @@ def create_dashboard(df: pd.DataFrame, output_path: str = "github_dashboard.svg"
                 bbox_inches='tight', pad_inches=0.3)
     plt.close()
 
+    # Post-process SVG to add clickable links
+    add_clickable_links(output_path, recent_repos)
+
     logger.info(f"Dashboard saved to {output_path}")
+
+
+def add_clickable_links(svg_path: str, repos_df: pd.DataFrame):
+    """Add clickable hyperlinks to repository names in the SVG"""
+    if 'url' not in repos_df.columns:
+        logger.warning("URL column not found, skipping clickable links")
+        return
+    
+    with open(svg_path, 'r', encoding='utf-8') as f:
+        svg_content = f.read()
+    
+    for _, row in repos_df.iterrows():
+        repo_name = row['name']
+        repo_url = row['url']
+        
+        # Find text elements containing the repo name
+        # Match the exact repo name in text elements
+        pattern = f'(<text[^>]*>)({re.escape(repo_name)})(</text>)'
+        
+        # Replace with linked version
+        replacement = f'<a href="{repo_url}" target="_blank">\\1\\2\\3</a>'
+        svg_content = re.sub(pattern, replacement, svg_content)
+    
+    with open(svg_path, 'w', encoding='utf-8') as f:
+        f.write(svg_content)
+    
+    logger.info(f"Added clickable links to {len(repos_df)} repositories")
