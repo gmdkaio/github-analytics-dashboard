@@ -11,7 +11,7 @@ Automated data pipeline that fetches repository data from the GitHub API and gen
 - Automated ETL pipeline for GitHub repository data
 - Theme-able dark dashboard (see [Themes](#themes) below)
 - Fork-excluded portfolio view — only your own work is counted
-- Lifecycle classification (Live / In progress / Shipped / Stub / Archived)
+- Lifecycle classification (Live / In progress / Stub / Archived)
 - Language composition treemap
 - Cumulative repository growth
 - Star leaderboard and portfolio composition breakdown
