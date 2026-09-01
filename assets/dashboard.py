@@ -1,28 +1,39 @@
 import pandas as pd
-import seaborn as sns
+import squarify
 import matplotlib.pyplot as plt
-from matplotlib.patches import FancyBboxPatch, Rectangle
+from matplotlib.patches import FancyBboxPatch
 import logging
 import re
+import sys
+from pathlib import Path
+
+sys.path.append(str(Path(__file__).parent.parent / "src"))
+from palettes import THEMES, DEFAULT_THEME
 
 logger = logging.getLogger(__name__)
 
+# Languages to leave out of the treemap. They tend to show up as a side effect
+# of a repo (a build config, a docs page, a tiny script) rather than as the
+# repo's primary language, and can crowd out the languages that matter.
+#
+# To include everything in the treemap, comment out the line below (or set
+# FILTERED_LANGS = set()).
+FILTERED_LANGS = {"HTML", "CSS", "JavaScript"}
 
-def create_dashboard(df: pd.DataFrame, output_path: str = "github_dashboard.svg"):
-    BG = "#0d1117"
-    PANEL = "#161b22"
-    CARD = "#21262d"
-    BORDER = "#30363d"
-    TEXT = "#c9d1d9"
-    TEXT_MUTED = "#8b949e"
-    BLUE = "#58a6ff"
-    GREEN = "#3fb950"
-    YELLOW = "#e3b341"
-    PURPLE = "#a371f7"
-    ORANGE = "#f0883e"
-    PINK = "#db61a2"
+STAGE_ORDER = ["Live", "In progress", "Stub", "Archived"]
 
-    sns.set_theme(style="dark")
+
+def create_dashboard(df: pd.DataFrame, output_path: str = "github_dashboard.svg", theme: str = DEFAULT_THEME):
+    T = THEMES.get(theme, THEMES[DEFAULT_THEME])
+    BG, PANEL, CARD, BORDER = T["bg"], T["panel"], T["card"], T["border"]
+    TEXT, TEXT_MUTED = T["text"], T["muted"]
+    HERO, C2, C3, C4, C5 = T["hero"], T["c2"], T["c3"], T["c4"], T["c5"]
+    ACCENT, PRIVATE = T["accent"], T["private"]
+    RAMP = [HERO, C2, C3, C4, C5]
+    STAGE_COLORS = {
+        "Live": ACCENT, "In progress": HERO, "Stub": C5, "Archived": C4,
+    }
+
     plt.rcParams.update({
         "figure.facecolor": BG,
         "axes.facecolor": PANEL,
@@ -40,10 +51,9 @@ def create_dashboard(df: pd.DataFrame, output_path: str = "github_dashboard.svg"
     df = df.copy()
 
     total_repos = len(df)
-    active_repos = int(df["is_active"].sum())
-    inactive_repos = total_repos - active_repos
     total_stars = int(df["stars"].sum())
-    total_languages = int(df["language"].nunique())
+    languages_used = int(df["language"].nunique())
+    active_repos = int(df["is_active"].sum())
     private_repos = int(df["private"].sum())
     public_repos = total_repos - private_repos
 
@@ -53,6 +63,8 @@ def create_dashboard(df: pd.DataFrame, output_path: str = "github_dashboard.svg"
         .reset_index(name="count")
         .sort_values("year_created")
     )
+    repos_per_year["cumulative"] = repos_per_year["count"].cumsum()
+    current_year = pd.Timestamp.now(tz="UTC").year
 
     lang_counts = (
         df[df["language"].notna()]
@@ -60,184 +72,152 @@ def create_dashboard(df: pd.DataFrame, output_path: str = "github_dashboard.svg"
         .size()
         .reset_index(name="count")
         .sort_values("count", ascending=False)
-        .head(8)
+    )
+    # Comment out the next line to include HTML/CSS/JS in the treemap.
+    lang_counts = lang_counts[~lang_counts["language"].isin(FILTERED_LANGS)]
+    lang_counts = lang_counts.head(10)
+
+    stage_counts = (
+        df["stage"].value_counts().reindex(STAGE_ORDER).dropna().astype(int)
     )
 
-    fig = plt.figure(figsize=(20, 14), facecolor=BG)
-    gs = fig.add_gridspec(5, 6, height_ratios=[1.2, 1.5, 1.5, 1.5, 1.5], 
-                          hspace=0.5, wspace=0.35, top=0.93, bottom=0.05, 
-                          left=0.05, right=0.95)
+    fig = plt.figure(figsize=(20, 15), facecolor=BG)
+    gs = fig.add_gridspec(
+        4, 6,
+        height_ratios=[0.7, 2.0, 1.7, 0.55],
+        hspace=0.55, wspace=0.35,
+        top=0.92, bottom=0.05, left=0.05, right=0.95,
+    )
 
-    def create_kpi_card(ax, value, label, color):
+    def create_stat_tile(ax, value, label, color):
         ax.axis("off")
-        rect = FancyBboxPatch((0.08, 0.15), 0.84, 0.7, 
-                              boxstyle="round,pad=0.08",
-                              facecolor=CARD, edgecolor=color, 
-                              linewidth=2.5, transform=ax.transAxes)
+        rect = FancyBboxPatch((0.08, 0.15), 0.84, 0.7,
+                               boxstyle="round,pad=0.08",
+                               facecolor=CARD, edgecolor=color,
+                               linewidth=2.5, transform=ax.transAxes)
         ax.add_patch(rect)
-        
         ax.text(0.5, 0.55, str(value), ha="center", va="center",
-                fontsize=36, weight="bold", color=color, transform=ax.transAxes)
-        ax.text(0.5, 0.28, label, ha="center", va="center",
-                fontsize=12, color=TEXT_MUTED, weight="600", transform=ax.transAxes)
+                 fontsize=32, weight="bold", color=color, transform=ax.transAxes)
+        ax.text(0.5, 0.26, label, ha="center", va="center",
+                 fontsize=11, color=TEXT_MUTED, weight="600", transform=ax.transAxes)
 
-    ax_kpi1 = fig.add_subplot(gs[0, 0:2])
-    create_kpi_card(ax_kpi1, total_repos, "TOTAL REPOS", BLUE)
-    
-    ax_kpi2 = fig.add_subplot(gs[0, 2:4])
-    create_kpi_card(ax_kpi2, active_repos, "ACTIVE", GREEN)
-    
-    ax_kpi3 = fig.add_subplot(gs[0, 4])
-    create_kpi_card(ax_kpi3, total_stars, "STARS", YELLOW)
-    
-    ax_kpi4 = fig.add_subplot(gs[0, 5])
-    create_kpi_card(ax_kpi4, total_languages, "LANGUAGES", PURPLE)
+    # Equal-width tiles — the old 2/1/1/2 column split left a single-digit
+    # value (languages used) in the widest card and two-digit values cramped
+    # into the narrow ones.
+    stat_gs = gs[0, :].subgridspec(1, 4, wspace=0.25)
+    create_stat_tile(fig.add_subplot(stat_gs[0]), total_repos, "TOTAL REPOS", HERO)
+    create_stat_tile(fig.add_subplot(stat_gs[1]), total_stars, "TOTAL STARS", C2)
+    create_stat_tile(fig.add_subplot(stat_gs[2]), active_repos, "ACTIVE REPOS", ACCENT)
+    create_stat_tile(fig.add_subplot(stat_gs[3]), languages_used, "LANGUAGES USED", C3)
 
-    ax1 = fig.add_subplot(gs[1, :])
-    ax1.plot(repos_per_year["year_created"], repos_per_year["count"],
-             marker="o", linewidth=3.5, markersize=10, color=BLUE, 
-             markerfacecolor=BLUE, markeredgecolor=BG, markeredgewidth=2)
-    ax1.fill_between(repos_per_year["year_created"], repos_per_year["count"], 
-                     alpha=0.2, color=BLUE)
-    ax1.set_title("Repository Growth Timeline", fontsize=15, pad=15, weight="bold")
-    ax1.set_xlabel("Year", fontsize=11, weight="600")
-    ax1.set_ylabel("Repositories", fontsize=11, weight="600")
-    ax1.grid(alpha=0.2, linestyle='--')
+    # --- Language composition treemap -------------------------------------
+    ax_tree = fig.add_subplot(gs[1, 0:4])
+    ax_tree.axis("off")
+    if len(lang_counts):
+        sizes = lang_counts["count"].tolist()
+        total_n = sum(sizes)
+        colors = [RAMP[i % len(RAMP)] for i in range(len(sizes))]
+        labels = [
+            f"{lang}\n{count / total_n * 100:.0f}%"
+            for lang, count in zip(lang_counts["language"], lang_counts["count"])
+        ]
+        squarify.plot(
+            sizes=sizes, label=labels, color=colors, ax=ax_tree,
+            pad=True, text_kwargs={"fontsize": 12, "weight": "600", "color": BG},
+        )
+    ax_tree.set_title("Language Composition", fontsize=15, pad=15, weight="bold", color=TEXT)
 
-    ax2 = fig.add_subplot(gs[2:4, 0:2])
-    colors = [BLUE, GREEN, PURPLE, ORANGE, YELLOW, PINK, "#bc4c00", "#8957e5"]
-    wedges, texts, autotexts = ax2.pie(
-        lang_counts["count"], 
-        labels=lang_counts["language"],
-        colors=colors[:len(lang_counts)],
-        autopct='%1.1f%%',
-        startangle=90,
-        pctdistance=0.82,
-        wedgeprops=dict(width=0.5, edgecolor=BG, linewidth=2),
-        textprops={'color': TEXT, 'fontsize': 11, 'weight': '600'}
+    # --- Lifecycle donut -----------------------------------------------
+    ax_donut = fig.add_subplot(gs[1, 4:6])
+    if len(stage_counts):
+        colors = [STAGE_COLORS[s] for s in stage_counts.index]
+        wedges, _ = ax_donut.pie(
+            stage_counts.values,
+            colors=colors,
+            startangle=90,
+            wedgeprops=dict(width=0.42, edgecolor=BG, linewidth=2),
+        )
+        ax_donut.text(0, 0, str(total_repos), ha="center", va="center",
+                       fontsize=30, weight="bold", color=TEXT)
+        ax_donut.text(0, -0.22, "REPOS", ha="center", va="center",
+                       fontsize=11, weight="600", color=TEXT_MUTED)
+        legend_labels = [f"{s}  ({stage_counts[s]})" for s in stage_counts.index]
+        ax_donut.legend(
+            wedges, legend_labels, loc="center left", bbox_to_anchor=(1.02, 0.5),
+            frameon=False, fontsize=11, labelcolor=TEXT,
+        )
+    ax_donut.set_title("Lifecycle", fontsize=15, pad=15, weight="bold", color=TEXT)
+
+    # --- Cumulative growth curve -----------------------------------------
+    ax_growth = fig.add_subplot(gs[2, 0:3])
+    ax_growth.plot(
+        repos_per_year["year_created"], repos_per_year["cumulative"],
+        marker="o", linewidth=3.5, markersize=9, color=HERO,
+        markerfacecolor=HERO, markeredgecolor=BG, markeredgewidth=2,
     )
-    for autotext in autotexts:
-        autotext.set_color(BG)
-        autotext.set_fontsize(11)
-        autotext.set_weight('bold')
-    ax2.set_title("Language Distribution", fontsize=15, pad=15, weight="bold")
+    ax_growth.fill_between(
+        repos_per_year["year_created"], repos_per_year["cumulative"],
+        alpha=0.2, color=HERO,
+    )
+    title = "Cumulative Repositories"
+    if current_year in repos_per_year["year_created"].values:
+        title += f"  (note: {current_year} is year to date)"
+    ax_growth.set_title(title, fontsize=15, pad=15, weight="bold", color=TEXT)
+    ax_growth.set_xlabel("Year", fontsize=11, weight="600")
+    ax_growth.set_ylabel("Total repos", fontsize=11, weight="600")
+    ax_growth.grid(alpha=0.2, linestyle="--")
 
-    # Professional table for recently updated repos
-    ax3 = fig.add_subplot(gs[2:4, 2:4])
-    ax3.axis('off')
-    
-    # Get top 5 recent repos with URL if available
-    cols_to_select = ['name', 'days_since_last_push']
-    if 'url' in df.columns:
-        cols_to_select.insert(1, 'url')
-    
-    recent_repos = df.nsmallest(5, 'days_since_last_push')[cols_to_select].copy()
-    
-    # Title
-    ax3.text(0.5, 0.95, "Most Recently Updated", ha='center', fontsize=16, 
-            weight='bold', color=TEXT, transform=ax3.transAxes)
-    
-    # Column headers
-    header_y = 0.87
-    ax3.text(0.08, header_y, "Name", fontsize=13, weight='bold', color=TEXT_MUTED, transform=ax3.transAxes)
-    ax3.text(0.92, header_y, "Last Update", fontsize=13, weight='bold', color=TEXT_MUTED, transform=ax3.transAxes, ha='right')
-    
-    # Header line
-    ax3.plot([0.08, 0.92], [header_y - 0.025, header_y - 0.025], color=BORDER, linewidth=2, transform=ax3.transAxes)
-    
-    # Table rows
-    row_height = 0.14
-    start_y = header_y - 0.08
-    
-    for i, (_, row) in enumerate(recent_repos.iterrows()):
-        y_pos = start_y - (i * row_height)
-        
-        # Subtle separator line
+    # --- Leaderboard: top repos by stars (table) --------------------------
+    ax_lead = fig.add_subplot(gs[2, 3:6])
+    ax_lead.axis("off")
+    ax_lead.set_xlim(0, 1)
+    ax_lead.set_ylim(0, 1)
+    top_starred = df.nlargest(5, "stars")[["name", "stars", "url"]].reset_index(drop=True)
+
+    header_y = 0.90
+    ax_lead.text(0.04, header_y, "Repo", fontsize=13, weight="bold", color=TEXT_MUTED)
+    ax_lead.text(0.96, header_y, "Stars", fontsize=13, weight="bold", color=TEXT_MUTED, ha="right")
+    ax_lead.plot([0.04, 0.96], [header_y - 0.06, header_y - 0.06], color=BORDER, linewidth=1.5)
+
+    row_height = 0.17
+    start_y = header_y - 0.16
+    for i, row in top_starred.iterrows():
+        y = start_y - i * row_height
         if i > 0:
-            ax3.plot([0.08, 0.92], [y_pos + 0.07, y_pos + 0.07], color=BORDER, linewidth=0.5, alpha=0.3, transform=ax3.transAxes)
-        
-        # Name
-        ax3.text(0.08, y_pos, row['name'], fontsize=12, weight='600', 
-                color=TEXT, transform=ax3.transAxes, va='center')
-        
-        # Last update
-        days = int(row['days_since_last_push'])
-        if days == 0:
-            time_text = "Today"
-        elif days == 1:
-            time_text = "1 day ago"
-        else:
-            time_text = f"{days} days ago"
-        ax3.text(0.92, y_pos, time_text, fontsize=12,
-                color=TEXT_MUTED, transform=ax3.transAxes, va='center', ha='right')
-    
-    # Professional table for top starred repos
-    ax7 = fig.add_subplot(gs[2:4, 4:6])
-    ax7.axis('off')
-    
-    # Get top 5 starred repos with URL if available
-    cols_to_select_stars = ['name', 'stars']
-    if 'url' in df.columns:
-        cols_to_select_stars.insert(1, 'url')
-    
-    top_starred = df.nlargest(5, 'stars')[cols_to_select_stars].copy()
-    
-    # Title
-    ax7.text(0.5, 0.95, "Top Repos by Stars", ha='center', fontsize=16, 
-            weight='bold', color=TEXT, transform=ax7.transAxes)
-    
-    # Column headers
-    header_y = 0.87
-    ax7.text(0.08, header_y, "Name", fontsize=13, weight='bold', color=TEXT_MUTED, transform=ax7.transAxes)
-    ax7.text(0.92, header_y, "Stars", fontsize=13, weight='bold', color=TEXT_MUTED, transform=ax7.transAxes, ha='right')
-    
-    # Header line
-    ax7.plot([0.08, 0.92], [header_y - 0.025, header_y - 0.025], color=BORDER, linewidth=2, transform=ax7.transAxes)
-    
-    # Table rows
-    row_height = 0.14
-    start_y = header_y - 0.08
-    
-    for i, (_, row) in enumerate(top_starred.iterrows()):
-        y_pos = start_y - (i * row_height)
-        
-        # Subtle separator line
-        if i > 0:
-            ax7.plot([0.08, 0.92], [y_pos + 0.07, y_pos + 0.07], color=BORDER, linewidth=0.5, alpha=0.3, transform=ax7.transAxes)
-        
-        # Name
-        ax7.text(0.08, y_pos, row['name'], fontsize=12, weight='600', 
-                color=TEXT, transform=ax7.transAxes, va='center')
-        
-        # Stars with icon
-        ax7.text(0.92, y_pos, f"★ {int(row['stars'])}", fontsize=12, 
-                color=YELLOW, transform=ax7.transAxes, va='center', ha='right')
+            ax_lead.plot([0.04, 0.96], [y + 0.09, y + 0.09], color=BORDER, linewidth=0.5, alpha=0.3)
+        rank_color = RAMP[i % len(RAMP)]
+        ax_lead.text(0.04, y, f"{i + 1}", fontsize=13, weight="700", color=rank_color, va="center")
+        ax_lead.text(0.11, y, row["name"], fontsize=13, weight="600", color=TEXT, va="center")
+        ax_lead.text(0.96, y, f"★ {int(row['stars'])}", fontsize=13, weight="600", color=HERO,
+                     va="center", ha="right")
+    ax_lead.set_title("Leaderboard: Stars", fontsize=15, pad=15, weight="bold", color=TEXT)
 
-    ax4 = fig.add_subplot(gs[4, 0:2])
-    sns.histplot(df["size_mb"], bins=15, kde=True, color=PURPLE, 
-                 ax=ax4, edgecolor=BG, linewidth=1.5, alpha=0.8)
-    ax4.set_title("Size Distribution", fontsize=15, pad=15, weight="bold")
-    ax4.set_xlabel("Size (MB)", fontsize=11, weight="600")
-    ax4.set_ylabel("Repos", fontsize=11, weight="600")
-    ax4.grid(alpha=0.2)
+    # --- Composition bar (public/private + lifecycle strip) --------------
+    ax_comp = fig.add_subplot(gs[3, :])
+    ax_comp.axis("off")
+    ax_comp.set_xlim(0, 1)
+    ax_comp.set_ylim(0, 1)
+    x = 0.0
+    if total_repos:
+        for stage in STAGE_ORDER:
+            n = int(stage_counts.get(stage, 0))
+            if n == 0:
+                continue
+            w = n / total_repos
+            ax_comp.barh(0.5, w, left=x, height=0.6, color=STAGE_COLORS[stage],
+                         edgecolor=BG, linewidth=1.5)
+            if w > 0.05:
+                ax_comp.text(x + w / 2, 0.5, stage, ha="center", va="center",
+                             fontsize=10, weight="600", color=BG)
+            x += w
+    ax_comp.text(
+        0, 1.05, f"Composition — {public_repos} public / {private_repos} private, "
+        f"{total_stars} stars total",
+        ha="left", va="bottom", fontsize=11, weight="600", color=TEXT_MUTED,
+        transform=ax_comp.transAxes,
+    )
 
-    ax6 = fig.add_subplot(gs[4, 2:4])
-    sns.histplot(df["stars"], bins=10, kde=True, color=YELLOW, 
-                 ax=ax6, edgecolor=BG, linewidth=1.5, alpha=0.8)
-    ax6.set_title("Stars Distribution", fontsize=15, pad=15, weight="bold")
-    ax6.set_xlabel("Stars", fontsize=11, weight="600")
-    ax6.set_ylabel("Repos", fontsize=11, weight="600")
-    ax6.grid(alpha=0.2)
-
-    ax5 = fig.add_subplot(gs[4, 4:6])
-    sns.histplot(df["days_since_last_push"], bins=20, kde=True,
-                 color=ORANGE, ax=ax5, edgecolor=BG, linewidth=1.5, alpha=0.8)
-    ax5.set_title("Days Since Push", fontsize=15, pad=15, weight="bold")
-    ax5.set_xlabel("Days", fontsize=11, weight="600")
-    ax5.set_ylabel("Repos", fontsize=11, weight="600")
-    ax5.grid(alpha=0.2)
-
-    for ax in [ax1, ax2, ax3, ax4, ax5, ax6, ax7]:
+    for ax in [ax_growth]:
         ax.set_facecolor(PANEL)
         ax.spines["top"].set_visible(False)
         ax.spines["right"].set_visible(False)
@@ -245,44 +225,38 @@ def create_dashboard(df: pd.DataFrame, output_path: str = "github_dashboard.svg"
         ax.spines["bottom"].set_color(BORDER)
         ax.tick_params(colors=TEXT)
 
-    fig.suptitle("GitHub Analytics", fontsize=32, weight="bold", 
-                 color=TEXT, y=0.98, fontfamily='sans-serif')
+    fig.suptitle("GitHub Analytics", fontsize=32, weight="bold",
+                 color=TEXT, y=0.98, fontfamily="sans-serif")
 
-    plt.savefig(output_path, format="svg", facecolor=fig.get_facecolor(), 
-                bbox_inches='tight', pad_inches=0.3)
+    fmt = Path(output_path).suffix.lstrip(".") or "svg"
+    plt.savefig(output_path, format=fmt, facecolor=fig.get_facecolor(),
+                bbox_inches="tight", pad_inches=0.3)
     plt.close()
 
-    # Post-process SVG to add clickable links
-    add_clickable_links(output_path, recent_repos, top_starred)
+    if fmt == "svg":
+        add_clickable_links(output_path, top_starred)
 
-    logger.info(f"Dashboard saved to {output_path}")
+    logger.info(f"Dashboard saved to {output_path} (theme={theme})")
 
 
-def add_clickable_links(svg_path: str, recent_repos: pd.DataFrame, top_starred: pd.DataFrame):
+def add_clickable_links(svg_path: str, top_starred: pd.DataFrame):
     """Add clickable hyperlinks to repository names in the SVG"""
-    if 'url' not in recent_repos.columns and 'url' not in top_starred.columns:
+    if "url" not in top_starred.columns:
         logger.warning("URL column not found, skipping clickable links")
         return
-    
-    with open(svg_path, 'r', encoding='utf-8') as f:
+
+    with open(svg_path, "r", encoding="utf-8") as f:
         svg_content = f.read()
-    
-    # Combine both dataframes for linking
-    all_repos = pd.concat([recent_repos, top_starred]).drop_duplicates(subset=['name'])
-    
-    for _, row in all_repos.iterrows():
-        repo_name = row['name']
-        repo_url = row['url']
-        
-        # Find text elements containing the repo name
-        # Match the exact repo name in text elements
-        pattern = f'(<text[^>]*>)({re.escape(repo_name)})(</text>)'
-        
-        # Replace with linked version - using xlink:href for SVG compatibility
+
+    for _, row in top_starred.iterrows():
+        repo_name = row["name"]
+        repo_url = row["url"]
+
+        pattern = f"(<text[^>]*>)({re.escape(repo_name)})(</text>)"
         replacement = f'<a xlink:href="{repo_url}" target="_blank">\\1\\2\\3</a>'
         svg_content = re.sub(pattern, replacement, svg_content, count=1)
-    
-    with open(svg_path, 'w', encoding='utf-8') as f:
+
+    with open(svg_path, "w", encoding="utf-8") as f:
         f.write(svg_content)
-    
-    logger.info(f"Added clickable links to {len(all_repos)} repositories")
+
+    logger.info(f"Added clickable links to {len(top_starred)} repositories")
