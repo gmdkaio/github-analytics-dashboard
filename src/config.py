@@ -30,3 +30,6 @@ PROJECT_ROOT = Path(__file__).parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
 CSV_OUTPUT = str(DATA_DIR / "github_repos_clean.csv")
 DASHBOARD_OUTPUT = str(DATA_DIR / "github_dashboard.svg")
+
+# Dashboard theme: divergence | lab | github (see src/palettes.py)
+THEME = os.getenv("DASHBOARD_THEME", "divergence")
