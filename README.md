@@ -121,7 +121,7 @@ Only the dashboard at the top updates every night.
 
 | To | Change |
 |---|---|
-| Pick the layout, theme or flat look | Repository variables `DASHBOARD_LAYOUT`, `DASHBOARD_THEME`, `DASHBOARD_GRADIENTS` (Settings → Secrets and variables → Actions → Variables). An empty theme means the layout's default. |
+| Pick the layout, theme or flat look | Repository variables `DASHBOARD_LAYOUT`, `DASHBOARD_THEME`, `DASHBOARD_GRADIENTS` (Settings → Secrets and variables → Actions → Variables), or from a terminal: `gh variable set DASHBOARD_LAYOUT --body bento`, `gh variable set DASHBOARD_THEME --body dusk`, then `gh workflow run update-dashboard.yml` to redraw now. An empty theme means the layout's default. |
 | List more or fewer languages | `TOP_N` in `assets/layouts/common.py`. Colors repeat after 5. The card fits about 10 rows, bento and terminal about 7. |
 | Exclude or include languages | `FILTERED_LANGS` in `assets/layouts/common.py`. HTML, CSS and JavaScript are left out by default because they are usually a side effect of a repo, not what it is written in. |
 | Show private repos in the leaderboards | `SHOW_PRIVATE = True` in `assets/layouts/common.py`. Their names then appear in the public SVG. |
