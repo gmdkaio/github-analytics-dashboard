@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 def get_repositories():
     url = f"{BASE_URL}/user/repos"
-    params = {"per_page": 100, "page": 1}
+    params = {"per_page": 100, "page": 1, "affiliation": "owner"}  # not org or collaborator repos
     repos = []
 
     while True:
