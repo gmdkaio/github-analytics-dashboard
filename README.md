@@ -41,7 +41,7 @@ The flat look: solid bars, no sparklines. Applies to card and bento; terminal ha
 
 ## Themes
 
-Nine themes, picked with `DASHBOARD_THEME`. Any theme works with any layout; here they are on the card.
+Twelve themes, picked with `DASHBOARD_THEME`. Any theme works with any layout; here they are on the card.
 
 <table>
 <tr>
@@ -93,6 +93,23 @@ Petrol base with green, amber and auburn.
 <img src=".github/assets/themes/github.svg" alt="github" width="100%"><br>
 <b><code>github</code></b><br>
 GitHub's own dark palette.
+</td>
+</tr>
+<tr>
+<td width="33%" valign="top">
+<img src=".github/assets/themes/worldline.svg" alt="worldline" width="100%"><br>
+<b><code>worldline</code></b><br>
+Red terminal with nixie-tube amber, after the Steins;Gate divergence meter.
+</td>
+<td width="33%" valign="top">
+<img src=".github/assets/themes/edgerunner.svg" alt="edgerunner" width="100%"><br>
+<b><code>edgerunner</code></b><br>
+Yellow, magenta and cyan on deep blue, sampled from Cyberpunk: Edgerunners.
+</td>
+<td width="33%" valign="top">
+<img src=".github/assets/themes/redline.svg" alt="redline" width="100%"><br>
+<b><code>redline</code></b><br>
+The Edgerunners netrunning HUD: coral red on dark teal, green for Live.
 </td>
 </tr>
 </table>
