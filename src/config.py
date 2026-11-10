@@ -31,5 +31,7 @@ DATA_DIR = PROJECT_ROOT / "data"
 CSV_OUTPUT = str(DATA_DIR / "github_repos_clean.csv")
 DASHBOARD_OUTPUT = str(DATA_DIR / "github_dashboard.svg")
 
-# Dashboard theme: divergence | lab | github (see src/palettes.py)
-THEME = os.getenv("DASHBOARD_THEME", "divergence")
+# Dashboard look (see README "Layouts" and "Themes")
+LAYOUT = os.getenv("DASHBOARD_LAYOUT", "card")      # card | bento | terminal
+THEME = os.getenv("DASHBOARD_THEME", "")             # empty -> layout's default theme
+GRADIENTS = os.getenv("DASHBOARD_GRADIENTS", "1") == "1"
