@@ -106,7 +106,7 @@ def render(s, t, path, gradients=True):
         c.text(W - PX, y, f"★{r['stars']}", 14, "semibold", t["text"], ha="right")
         y += LINE + 2
 
-    y += 10
+    y = max(y + 10, min(y + 10 + 2 * LINE, H - PT - 4))  # two blank lines, kept inside the padding
     end = c.runs(PX, y, prompt, 14)
     c.rect(end + CH, y - 14, 9, 17, fc=t["hero"], z=3)
 

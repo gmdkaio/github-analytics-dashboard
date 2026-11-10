@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-11-10T12:04:58.215841</dc:date>
+    <dc:date>2026-11-10T12:15:46.599031</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -36,35 +36,35 @@ L 1156 187.4
 L 44 187.4 
 L 44 105.4 
 z
-" clip-path="url(#pce14ccc6a5)" style="fill: none; stroke: #1d3020; stroke-linejoin: miter"/>
+" clip-path="url(#p3a0ec24875)" style="fill: none; stroke: #1d3020; stroke-linejoin: miter"/>
    </g>
    <g id="line2d_1">
     <path d="M 266.4 105.4 
 L 266.4 187.4 
-" clip-path="url(#pce14ccc6a5)" style="fill: none; stroke: #1d3020; stroke-linecap: square"/>
+" clip-path="url(#p3a0ec24875)" style="fill: none; stroke: #1d3020; stroke-linecap: square"/>
    </g>
    <g id="line2d_2">
     <path d="M 488.8 105.4 
 L 488.8 187.4 
-" clip-path="url(#pce14ccc6a5)" style="fill: none; stroke: #1d3020; stroke-linecap: square"/>
+" clip-path="url(#p3a0ec24875)" style="fill: none; stroke: #1d3020; stroke-linecap: square"/>
    </g>
    <g id="line2d_3">
     <path d="M 711.2 105.4 
 L 711.2 187.4 
-" clip-path="url(#pce14ccc6a5)" style="fill: none; stroke: #1d3020; stroke-linecap: square"/>
+" clip-path="url(#p3a0ec24875)" style="fill: none; stroke: #1d3020; stroke-linecap: square"/>
    </g>
    <g id="line2d_4">
     <path d="M 933.6 105.4 
 L 933.6 187.4 
-" clip-path="url(#pce14ccc6a5)" style="fill: none; stroke: #1d3020; stroke-linecap: square"/>
+" clip-path="url(#p3a0ec24875)" style="fill: none; stroke: #1d3020; stroke-linecap: square"/>
    </g>
    <g id="patch_3">
-    <path d="M 195.2 598.1 
-L 204.2 598.1 
-L 204.2 615.1 
-L 195.2 615.1 
+    <path d="M 195.2 641.5 
+L 204.2 641.5 
+L 204.2 658.5 
+L 195.2 658.5 
 z
-" clip-path="url(#pce14ccc6a5)" style="fill: #39ff7a"/>
+" clip-path="url(#p3a0ec24875)" style="fill: #39ff7a"/>
    </g>
    <g id="text_1">
     <!-- gmdkaio@github -->
@@ -4747,7 +4747,7 @@ z
    </g>
    <g id="text_108">
     <!-- gmdkaio@github -->
-    <g style="fill: #39ff7a" transform="translate(44 612.1) scale(0.14 -0.14)">
+    <g style="fill: #39ff7a" transform="translate(44 655.5) scale(0.14 -0.14)">
      <use xlink:href="#JetBrainsMono-Regular-ff"/>
      <use xlink:href="#JetBrainsMono-Regular-126" transform="translate(60 0)"/>
      <use xlink:href="#JetBrainsMono-Regular-e6" transform="translate(120 0)"/>
@@ -4766,7 +4766,7 @@ z
    </g>
    <g id="text_109">
     <!-- :~$ -->
-    <g style="fill: #6e9f68" transform="translate(161.6 612.1) scale(0.14 -0.14)">
+    <g style="fill: #6e9f68" transform="translate(161.6 655.5) scale(0.14 -0.14)">
      <use xlink:href="#JetBrainsMono-Regular-38e"/>
      <use xlink:href="#JetBrainsMono-Regular-52d" transform="translate(60 0)"/>
      <use xlink:href="#JetBrainsMono-Regular-4d1" transform="translate(120 0)"/>
@@ -4775,7 +4775,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="pce14ccc6a5">
+  <clipPath id="p3a0ec24875">
    <rect x="0" y="0" width="1200" height="700"/>
   </clipPath>
  </defs>
