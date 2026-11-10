@@ -77,7 +77,7 @@ def render(s, t, path, gradients=True):
         c.text(rx, y, st.lower(), 14, color=t["text"])
         c.text(rx + 130, y, "█" * round(n / peak_st * 20), 14, color=stage_color(t, st))
         c.text(W - PX, y, str(n), 14, color=t["text"], ha="right")
-        y += LINE + 4
+        y += LINE
 
     y += 18 - 4
     heading(rx, y + 16, "## LAST PUSH", "repos by month, 12m")

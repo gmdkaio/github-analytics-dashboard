@@ -4,6 +4,20 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+# A repo's status comes from one of these GitHub topics, set by hand on the
+# repo page. Untagged repos are Active if pushed in the last 90 days, else Quiet.
+STATUS_TOPICS = {"wip": "In progress", "paused": "Paused", "finished": "Finished", "dropped": "Dropped"}
+
+
+def lifecycle(r):
+    if r["archived"]:
+        return "Archived"
+    for topic, stage in STATUS_TOPICS.items():
+        if topic in r["topics"]:
+            return stage
+    return "Active" if r["days_since_last_push"] < 90 else "Quiet"
+
+
 def repos_to_dataframe(repos):
     if not repos:
         logger.warning("No repositories to transform")
@@ -48,16 +62,6 @@ def repos_to_dataframe(repos):
     df = df[~df["fork"]].reset_index(drop=True)
     if forks_dropped:
         logger.info(f"Excluded {forks_dropped} forked repositories")
-
-    def lifecycle(r):
-        if r["archived"]:
-            return "Archived"
-        d = r["days_since_last_push"]
-        if d < 90:
-            return "Live"
-        if d <= 365:
-            return "In progress"
-        return "Stub"
 
     df["stage"] = df.apply(lifecycle, axis=1)
 

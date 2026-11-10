@@ -102,18 +102,22 @@ def render(s, t, path, gradients=True):
     c.text(rx, btop + 14, "Lifecycle", 15, "bold", t["text"])
     stage_cols = [(n, stage_color(t, st)) for st, n in s.stages]
     _segmented_bar(c, rx, btop + 30, rw, 12, stage_cols)
-    x = rx
-    for st, n in s.stages:
-        c.circle(x + 4, btop + 62, 4, stage_color(t, st))
-        x = c.runs(x + 16, btop + 67, [(st, t["text"])], 13, gap=8)
-        x = c.runs(x, btop + 67, [(str(n), t["muted"])], 13) + 20
+    x, ly = rx, btop + 67
+    for st, n in s.stages:  # legend, wrapping to a new line when full
+        item_w = 16 + c.width(st, 13) + 8 + c.width(str(n), 13)
+        if x > rx and x + item_w > rx + rw:
+            x, ly = rx, ly + 22
+        c.circle(x + 4, ly - 5, 4, stage_color(t, st))
+        x = c.runs(x + 16, ly, [(st, t["text"])], 13, gap=8)
+        x = c.runs(x, ly, [(str(n), t["muted"])], 13) + 20
+    extra = ly - (btop + 67)
 
     # right: most starred, spread so the last card sits on the bottom line
-    c.text(rx, btop + 108, "Most starred", 15, "bold", t["text"])
+    c.text(rx, btop + 108 + extra, "Most starred", 15, "bold", t["text"])
     top3 = s.leaderboard[:3]
     card_h = 48 if gradients else 37
     n = len(top3)
-    gap = min((bbot - btop - 122 - n * card_h) / (n - 1), 40) if n > 1 else 0
+    gap = min((bbot - btop - 122 - extra - n * card_h) / (n - 1), 40) if n > 1 else 0
     first = bbot - n * card_h - gap * (n - 1)
     peak_s = top3[0]["stars"] if top3 and top3[0]["stars"] else 1
     for i, r in enumerate(top3):
