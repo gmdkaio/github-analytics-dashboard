@@ -94,18 +94,16 @@ def render(s, t, path, gradients=True):
     per = max(math.ceil(s.total / 45), 1)
     unit = "repo" if per == 1 else f"{per} repos"
     c.text(x + 22, y + 22 + 14, f"Lifecycle · one square per {unit}", 16, "semibold", t["text"], family=HEAD)
-    lx = x + w - 22
-    for st, n in reversed(s.stages):
+    lx, ly = x + 22, y + 22 + 14 + 22
+    for st, n in s.stages:  # legend row under the title
         label = f"{st} {n}"
-        lx -= c.width(label, 12)
-        c.text(lx, y + 22 + 14, label, 12, color=t["text"])
-        lx -= 14
-        c.rect(lx, y + 22 + 6, 8, 8, r=2, fc=stage_color(t, st), z=3)
-        lx -= 14
+        c.rect(lx, ly - 8, 8, 8, r=2, fc=stage_color(t, st), z=3)
+        c.text(lx + 14, ly, label, 12, color=t["text"])
+        lx += 14 + c.width(label, 12) + 16
     cells = [stage_color(t, st) for st, n in s.stages for _ in range(math.ceil(n / per))]
     cw = (w - 44 - 14 * 6) / 15
     rows = max(math.ceil(len(cells) / 15), 1)
-    gy = y + 22 + 20 + 14
+    gy = ly + 12
     ch = min(26, (y + h - 22 - gy - (rows - 1) * 6) / rows)
     for i, color in enumerate(cells):
         c.rect(x + 22 + (i % 15) * (cw + 6), gy + (i // 15) * (ch + 6), cw, ch,

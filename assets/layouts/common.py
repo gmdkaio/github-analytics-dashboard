@@ -48,7 +48,7 @@ FILTERED_LANGS = {"HTML", "CSS", "JavaScript"}
 # README. Set to True to include private repos too.
 SHOW_PRIVATE = False
 
-STAGE_ORDER = ["Live", "In progress", "Stub", "Archived"]
+STAGE_ORDER = ["Active", "In progress", "Paused", "Finished", "Quiet", "Dropped", "Archived"]
 
 
 # --------------------------------------------------------------------------
@@ -105,7 +105,7 @@ def top_languages(df):
     g = (
         d.groupby("language")
         .agg(n=("name", "size"), stars=("stars", "sum"),
-             live=("stage", lambda s: int((s == "Live").sum())))
+             live=("active", "sum"))
         .reset_index()
         .sort_values(["n", "stars", "language"], ascending=[False, False, True])
     )
@@ -128,6 +128,7 @@ def snapshot(df, now=None):
     created = pd.to_datetime(df["created_at"], utc=True)
     pushed = pd.to_datetime(df["pushed_at"], utc=True)
     private = df["private"].fillna(True).astype(bool)  # unknown counts as private
+    df["active"] = (now - pushed).dt.days < 90           # pushed in the last 90 days
 
     stars = int(df["stars"].sum())
     langs, other, classified = top_languages(df)
@@ -171,7 +172,7 @@ def snapshot(df, now=None):
     return Snapshot(
         user=user, now=now, total=len(df), public=int((~private).sum()),
         private=int(private.sum()), stars=stars,
-        live=int((df["stage"] == "Live").sum()),
+        live=int(df["active"].sum()),
         archived=int(df["archived"].astype(bool).sum()),
         year=now.year, created_ytd=len(this_year),
         pushed_month=int(((pushed.dt.year == now.year) & (pushed.dt.month == now.month)).sum()),

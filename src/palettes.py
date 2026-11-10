@@ -3,13 +3,13 @@ Dashboard color themes.
 
 Each theme provides: bg, panel, card, border, text, muted, hero, c2-c5, accent, private.
 `hero` and `c2..c5` are the categorical ramp used for the top 5 languages (rank order),
-leaderboard dots and composition colors; `accent` highlights the lifecycle "Live" state;
+leaderboard dots and composition colors; `accent` highlights live repos and the "Active" stage;
 `private` marks private repos.
 
 Optional keys (new):
   track  -> background of empty bar/progress tracks (falls back to `border`)
   prog   -> lifecycle "In progress" color (falls back to `hero`)
-  stub   -> lifecycle "Stub" color (falls back to `muted`)
+  stub   -> lifecycle "Quiet" color (falls back to `muted`)
 
 To add a new theme, copy one of the blocks below, tweak the hex values, and give it
 a key. It becomes selectable immediately via DASHBOARD_THEME=<key>.
@@ -37,7 +37,7 @@ THEMES = {
     },
 
     # --- New themes (redesign) -------------------------------------------
-    # Cool slate, ice-blue lead. Used by the Profile Card layout.
+    # Cool slate, ice-blue lead.
     "frost": {
         "bg": "#0E141B", "panel": "#141B24", "card": "#1A232E", "border": "#283442",
         "text": "#DCE4EC", "muted": "#8696A7",
@@ -112,10 +112,16 @@ DEFAULT_THEME = "divergence"
 
 def stage_color(theme: dict, stage: str) -> str:
     """Lifecycle color with fallbacks for themes that don't define prog/stub."""
-    if stage == "Live":
+    if stage == "Active":
         return theme["accent"]
     if stage == "In progress":
         return theme.get("prog", theme["hero"])
+    if stage == "Finished":
+        return theme["c2"]
+    if stage == "Paused":
+        return theme["c3"]
     if stage == "Archived":
         return theme["c4"]
-    return theme.get("stub", theme["muted"])
+    if stage == "Dropped":
+        return theme["c5"]
+    return theme.get("stub", theme["muted"])  # Quiet

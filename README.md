@@ -2,7 +2,7 @@
 
 A dashboard of your GitHub repos, drawn as an SVG for your profile README.
 A GitHub Action fetches your repos every night, draws the picture and commits it,
-so the image above is always about a day old. Forks are left out.
+so the image above is always about a day old. Only repos you own count, and forks are left out.
 
 ## Layouts
 
@@ -13,7 +13,7 @@ Three layouts, picked with `DASHBOARD_LAYOUT`. Each has a default theme.
 <td width="50%" valign="top">
 <img src=".github/assets/layouts/card.svg" alt="card layout" width="100%"><br>
 <b><code>card</code></b><br>
-<sub>Default · 1200 × 660 · theme <code>frost</code></sub><br>
+<sub>Default · 1200 × 660 · theme <code>redline</code></sub><br>
 Four KPI tiles with sparklines, the top languages, lifecycle and the three most starred repos.
 </td>
 <td width="50%" valign="top">
@@ -126,13 +126,16 @@ Only the dashboard at the top updates every night.
 | Exclude or include languages | `FILTERED_LANGS` in `assets/layouts/common.py`. HTML, CSS and JavaScript are left out by default because they are usually a side effect of a repo, not what it is written in. |
 | Show private repos in the leaderboards | `SHOW_PRIVATE = True` in `assets/layouts/common.py`. Their names then appear in the public SVG. |
 | Count forks | Remove the fork filter in `src/transform.py`. |
-| Move the Live / In progress / Stub cutoffs | `lifecycle()` in `src/transform.py`. |
+| Mark a repo's status | Add one topic to the repo on GitHub: `wip`, `paused`, `finished` or `dropped`. No code change. |
+| Change the status topics or the 90-day cutoff | `STATUS_TOPICS` and `lifecycle()` in `src/transform.py`. |
 | Add a theme | Copy a block in `src/palettes.py` and change the colors. `track`, `prog` and `stub` are optional. |
 | Change the update time | The `cron` line in `.github/workflows/update-dashboard.yml` (daily at 00:00 UTC). |
 
 ## How the numbers work
 
-- Lifecycle goes by the last push: Archived if archived on GitHub, Live if pushed in the last 90 days, In progress if 90 to 365 days, Stub after that. It measures activity, not quality.
+- Lifecycle comes from a status topic you set on each repo: `wip` is In progress, `paused` is Paused, `finished` is Finished, `dropped` is Dropped. An archived repo is always Archived. Untagged repos fall back to recency: Active if pushed in the last 90 days, Quiet after that.
+- Live repos counts every repo pushed in the last 90 days, whatever its tag.
+- Only repos you own are counted: no forks, no organization or collaborator repos.
 - Top languages: repos with no language or a filtered one are dropped, the rest are counted per language and sorted by count, then total stars, then name, so ties always land in the same order. Everything past `TOP_N` goes into "Other". Percentages are of the counted repos, rounded, so they may not add up to exactly 100.
 - Last push by month counts repos by the month of their latest push, which is not the same as commit activity.
 - Counts include private repos; names don't. The CSV the pipeline writes (`data/github_repos_clean.csv`) has every repo name, so it stays on your machine and out of git.
