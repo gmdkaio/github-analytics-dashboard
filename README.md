@@ -1,188 +1,149 @@
-# GitHub Analytics Dashboard
+<img src="data/github_dashboard.svg" alt="GitHub Analytics" width="100%">
 
-Automated data pipeline that fetches repository data from the GitHub API and generates data visualizations.
+A dashboard of your GitHub repos, drawn as an SVG for your profile README.
+A GitHub Action fetches your repos every night, draws the picture and commits it,
+so the image above is always about a day old. Forks are left out.
 
-## Dashboard Preview
+## Layouts
 
-![GitHub Analytics Dashboard](data/github_dashboard.svg)
+Three layouts, picked with `DASHBOARD_LAYOUT`. Each has a default theme.
 
-## Features
-
-- Automated ETL pipeline for GitHub repository data
-- Theme-able dark dashboard (see [Themes](#themes) below)
-- Fork-excluded portfolio view — only your own work is counted
-- Lifecycle classification (Live / In progress / Stub / Archived)
-- Language composition treemap
-- Cumulative repository growth
-- Star leaderboard and portfolio composition breakdown
-
-## Project Structure
-
-```
-github-analytics-dashboard/
-├── src/
-│   ├── config.py       # Environment configuration
-│   ├── palettes.py     # Theme color definitions
-│   ├── extract.py      # GitHub API data extraction
-│   ├── transform.py    # Data processing and enrichment
-│   └── main.py         # Pipeline orchestration
-├── assets/
-│   └── dashboard.py    # Visualization generation
-├── data/               # Generated outputs
-├── notebooks/          # Data exploration
-└── requirements.txt    # Python dependencies
-```
-
-## Installation
-
-1. Clone the repository
-
-```bash
-git clone <repository-url>
-cd github-analytics-dashboard
-```
-
-2. Create and activate virtual environment
-
-```bash
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-```
-
-3. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-4. Configure environment variables
-
-Create a `.env` file in the project root:
-
-```env
-GITHUB_TOKEN=your_personal_access_token
-USERNAME=your_github_username
-```
-
-To generate a GitHub token:
-
-- Go to GitHub Settings > Developer settings > Personal access tokens
-- Create a token with `repo` scope for private repositories
-- Copy the token to your `.env` file
-
-## Usage
-
-```bash
-cd src
-python main.py
-```
-
-The pipeline will:
-
-1. Fetch all repositories from your GitHub account
-2. Process and enrich the data with calculated metrics
-3. Generate visualizations and save outputs to `data/`
-
-## Output Files
-
-- `data/github_repos_clean.csv` - Processed repository data
-- `data/github_dashboard.svg` - Analytics dashboard visualization
-
-## Data Metrics
-
-The pipeline calculates:
-
-- Total repositories and active status (forks excluded — see below)
-- Star and language counts
-- Repository size and age
-- Days since last push
-- Lifecycle stage (see below)
-
-### Forks are excluded
-
-`transform.py` drops any repository where GitHub's API reports `fork: true`
-before computing metrics. The dashboard is meant to report on your own work,
-not repos you cloned from someone else. This means the total repo count (and
-every percentage derived from it) reflects "your portfolio minus forks," not
-your full GitHub account.
-
-### Lifecycle classification
-
-Each repo is assigned a `stage`, in this order:
-
-| Stage                 | Rule                                  |
-| --------------------- | ------------------------------------- |
-| **Archived**    | `archived` flag set on GitHub       |
-| **Live**        | pushed to within the last 90 days     |
-| **In progress** | last push between 90 and 365 days ago |
-| **Stub**        | last push over a year ago             |
-
-This is purely activity-based (recency of the last push) rather than a
-quality/maturity judgment — a repo you consider "done" still shows as Stub
-once it's been quiet for a year, and that's intentional: the dashboard is
-reporting on activity, not grading your repos. Adjust the day thresholds in
-`transform.py`'s `lifecycle()` if your own definition of "stale" differs.
-`description`, `topics`, and `has_license` are still extracted per repo in
-`transform.py` if you want to build your own quality signal on top of them.
-
-### Language composition filter (optional)
-
-The language treemap excludes `HTML`, `CSS`, and `JavaScript` by default —
-these tend to be a side effect of a repo (a docs page, a build config) rather
-than its primary language, and can crowd out what the repo is actually
-written in. To include them again, open `assets/dashboard.py` and comment out
-(or clear) `FILTERED_LANGS`:
-
-```python
-# FILTERED_LANGS = {"HTML", "CSS", "JavaScript"}
-FILTERED_LANGS = set()
-```
+<table>
+<tr>
+<td width="50%" valign="top">
+<img src=".github/assets/layouts/card.svg" alt="card layout" width="100%"><br>
+<b><code>card</code></b><br>
+<sub>Default · 1200 × 660 · theme <code>frost</code></sub><br>
+Four KPI tiles with sparklines, the top languages, lifecycle and the three most starred repos.
+</td>
+<td width="50%" valign="top">
+<img src=".github/assets/layouts/bento.svg" alt="bento layout" width="100%"><br>
+<b><code>bento</code></b><br>
+<sub>1200 × 840 · theme <code>mono</code></sub><br>
+A grid of tiles: languages with stars and live counts, a live ring, one square per repo, repos per month, a leaderboard.
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<img src=".github/assets/layouts/terminal.svg" alt="terminal layout" width="100%"><br>
+<b><code>terminal</code></b><br>
+<sub>1200 × 700 · theme <code>phosphor</code></sub><br>
+The same numbers as command output, with block-character bars and a last-push heatmap.
+</td>
+<td width="50%" valign="top">
+<img src=".github/assets/layouts/card-flat.svg" alt="card layout without gradients" width="100%"><br>
+<b><code>card</code> with <code>DASHBOARD_GRADIENTS=0</code></b><br>
+<sub>1200 × 600</sub><br>
+The flat look: solid bars, no sparklines. Applies to card and bento; terminal has no gradients.
+</td>
+</tr>
+</table>
 
 ## Themes
 
-Set `DASHBOARD_THEME` to switch the dashboard's color palette. Three themes
-ship today, more are planned, and a theme builder (pick colors, preview live)
-is on the roadmap.
+Nine themes, picked with `DASHBOARD_THEME`. Any theme works with any layout; here they are on the card.
 
-```bash
-DASHBOARD_THEME=lab python src/main.py
-```
+<table>
+<tr>
+<td width="33%" valign="top">
+<img src=".github/assets/themes/frost.svg" alt="frost" width="100%"><br>
+<b><code>frost</code></b><br>
+Cool slate, ice-blue lead, mint for Live.
+</td>
+<td width="33%" valign="top">
+<img src=".github/assets/themes/mono.svg" alt="mono" width="100%"><br>
+<b><code>mono</code></b><br>
+Black to grey to white, no hue.
+</td>
+<td width="33%" valign="top">
+<img src=".github/assets/themes/phosphor.svg" alt="phosphor" width="100%"><br>
+<b><code>phosphor</code></b><br>
+CRT green with amber and cyan.
+</td>
+</tr>
+<tr>
+<td width="33%" valign="top">
+<img src=".github/assets/themes/graphite.svg" alt="graphite" width="100%"><br>
+<b><code>graphite</code></b><br>
+Neutral black, lime lead.
+</td>
+<td width="33%" valign="top">
+<img src=".github/assets/themes/dusk.svg" alt="dusk" width="100%"><br>
+<b><code>dusk</code></b><br>
+Deep plum, coral lead.
+</td>
+<td width="33%" valign="top">
+<img src=".github/assets/themes/daylight.svg" alt="daylight" width="100%"><br>
+<b><code>daylight</code></b><br>
+Light mode.
+</td>
+</tr>
+<tr>
+<td width="33%" valign="top">
+<img src=".github/assets/themes/divergence.svg" alt="divergence" width="100%"><br>
+<b><code>divergence</code></b><br>
+Amber and auburn, warm and high contrast.
+</td>
+<td width="33%" valign="top">
+<img src=".github/assets/themes/lab.svg" alt="lab" width="100%"><br>
+<b><code>lab</code></b><br>
+Petrol base with green, amber and auburn.
+</td>
+<td width="33%" valign="top">
+<img src=".github/assets/themes/github.svg" alt="github" width="100%"><br>
+<b><code>github</code></b><br>
+GitHub's own dark palette.
+</td>
+</tr>
+</table>
 
-| `divergence` (default)                                  | `lab`                                     | `github`                                        |
-| --------------------------------------------------------- | ------------------------------------------- | ------------------------------------------------- |
-| ![divergence theme](data/github_dashboard_divergence.svg) | ![lab theme](data/github_dashboard_lab.svg) | ![github theme](data/github_dashboard_github.svg) |
-| Amber / auburn, warm and high-contrast                    | Petrol base with green/amber/auburn accents | GitHub's native dark palette                      |
+The layout and theme pictures are a snapshot, made with `python scripts/readme_previews.py`.
+Only the dashboard at the top updates every night.
 
-To add your own theme, add a block to the `THEMES` dict in `src/palettes.py`
-(copy an existing one and change the hex values) — it becomes selectable via
-`DASHBOARD_THEME=<your-key>` immediately, no other code changes needed.
+## Make it yours
 
-## License
+| To | Change |
+|---|---|
+| Pick the layout, theme or flat look | Repository variables `DASHBOARD_LAYOUT`, `DASHBOARD_THEME`, `DASHBOARD_GRADIENTS` (Settings → Secrets and variables → Actions → Variables). An empty theme means the layout's default. |
+| List more or fewer languages | `TOP_N` in `assets/layouts/common.py`. Colors repeat after 5. The card fits about 10 rows, bento and terminal about 7. |
+| Exclude or include languages | `FILTERED_LANGS` in `assets/layouts/common.py`. HTML, CSS and JavaScript are left out by default because they are usually a side effect of a repo, not what it is written in. |
+| Show private repos in the leaderboards | `SHOW_PRIVATE = True` in `assets/layouts/common.py`. Their names then appear in the public SVG. |
+| Count forks | Remove the fork filter in `src/transform.py`. |
+| Move the Live / In progress / Stub cutoffs | `lifecycle()` in `src/transform.py`. |
+| Add a theme | Copy a block in `src/palettes.py` and change the colors. `track`, `prog` and `stub` are optional. |
+| Change the update time | The `cron` line in `.github/workflows/update-dashboard.yml` (daily at 00:00 UTC). |
 
-MIT License
+## How the numbers work
 
----
+- Lifecycle goes by the last push: Archived if archived on GitHub, Live if pushed in the last 90 days, In progress if 90 to 365 days, Stub after that. It measures activity, not quality.
+- Top languages: repos with no language or a filtered one are dropped, the rest are counted per language and sorted by count, then total stars, then name, so ties always land in the same order. Everything past `TOP_N` goes into "Other". Percentages are of the counted repos, rounded, so they may not add up to exactly 100.
+- Last push by month counts repos by the month of their latest push, which is not the same as commit activity.
+- Counts include private repos; names don't. The CSV the pipeline writes (`data/github_repos_clean.csv`) has every repo name, so it stays on your machine and out of git.
 
-## Auto-Update with GitHub Actions
+## Set it up
 
-This repository includes a GitHub Action that automatically updates the dashboard daily at midnight UTC.
-
-**Manual Trigger:** Go to Actions tab → "Update GitHub Analytics Dashboard" → Run workflow
-
-**Schedule:** Daily at 00:00 UTC (configurable in `.github/workflows/update-dashboard.yml`)
-
-**Theme:** Set a repository variable named `DASHBOARD_THEME` (Settings → Secrets and variables → Actions → Variables) to `divergence`, `lab`, or `github` to control the theme without a commit. Defaults to `divergence` if unset.
-
-## Using in Your GitHub Profile
-
-To display this dashboard in your GitHub profile README:
-
-1. Make sure this repository is public
-2. Enable GitHub Actions in repository settings
-3. Add to your profile README (replace `YOUR_USERNAME` and `REPO_NAME`):
+1. Fork or clone this repo and keep it public.
+2. Add two repository secrets: `GH_TOKEN`, a personal access token with `repo` scope (needed to count private repos), and `USERNAME`, your GitHub username.
+3. Enable Actions, then run "Update GitHub Analytics Dashboard" once from the Actions tab.
+4. Add the image to your profile README:
 
 ```markdown
 ![GitHub Analytics](https://raw.githubusercontent.com/YOUR_USERNAME/REPO_NAME/main/data/github_dashboard.svg)
 ```
 
-The dashboard will automatically update daily via GitHub Actions.
+To run it locally, you need Python 3.11+ and a `.env` with `GITHUB_TOKEN` and `USERNAME`:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+DASHBOARD_LAYOUT=bento python src/main.py
+python tests/smoke_test.py       # renders every layout and theme from a fixed dataset
+```
+
+## Licence
+
+[MIT](LICENSE). The dashboard uses the [Inter](https://github.com/rsms/inter),
+[Space Grotesk](https://github.com/floriankarsten/space-grotesk) and
+[JetBrains Mono](https://github.com/JetBrains/JetBrainsMono) fonts, under the SIL
+Open Font License 1.1 (licence files in `assets/fonts/`).
