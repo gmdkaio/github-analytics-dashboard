@@ -80,7 +80,32 @@ THEMES = {
         "hero": "#2B59C3", "c2": "#E07A1F", "c3": "#8A55D6", "c4": "#D2436B", "c5": "#C9A227",
         "accent": "#1E8E5A", "private": "#8A55D6", "track": "#E8EBEF",
     },
+
+    # --- Anime / cyberpunk ------------------------------------------------
+    # Red terminal with nixie-tube amber, after the Steins;Gate divergence meter.
+    "worldline": {
+        "bg": "#0B0505", "panel": "#140A0A", "card": "#1C0E0E", "border": "#3A1618",
+        "text": "#F2DCD2", "muted": "#9C716A",
+        "hero": "#FF3B3B", "c2": "#FFB03A", "c3": "#B81D31", "c4": "#6FB7B0", "c5": "#7D5C54",
+        "accent": "#FF8A1F", "private": "#B81D31", "track": "#211012",
+    },
+    # Night-city neon on deep blue, sampled from Cyberpunk: Edgerunners (season 1).
+    "edgerunner": {
+        "bg": "#03060F", "panel": "#071226", "card": "#0B1A33", "border": "#1B2D52",
+        "text": "#E6FBFF", "muted": "#7A93B8",
+        "hero": "#FAFF00", "c2": "#FF2BD6", "c3": "#00E5FF", "c4": "#8A5CFF", "c5": "#3E6FA8",
+        "accent": "#00F0FF", "private": "#FF2BD6", "track": "#0E1E3A",
+    },
+    # Netrunning HUD from Cyberpunk: Edgerunners: coral-red panels on dark teal,
+    # peach code cells, Lucy's lavender, David's yellow, the green CALL button for Live.
+    "redline": {
+        "bg": "#0C1214", "panel": "#121A1D", "card": "#18222A", "border": "#4A2A2E",
+        "text": "#F6E6E1", "muted": "#8E9C9E",
+        "hero": "#FF4A4A", "c2": "#FFB4A2", "c3": "#C9B8F0", "c4": "#FFD23F", "c5": "#B0303A",
+        "accent": "#3DDC84", "private": "#C9B8F0", "track": "#1E2A2E",
+    },
 }
+
 
 DEFAULT_THEME = "divergence"
 
