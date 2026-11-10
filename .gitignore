@@ -14,3 +14,6 @@ notebooks/
 Thumbs.db
 
 *.ipynb_checkpoints
+
+# Holds private repo names; generated locally by src/main.py
+data/github_repos_clean.csv
