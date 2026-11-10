@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 # layout key -> (renderer, default theme)
 LAYOUTS = {
-    "card": (card.render, "frost"),
+    "card": (card.render, "redline"),
     "bento": (bento.render, "mono"),
     "terminal": (terminal.render, "phosphor"),
 }
