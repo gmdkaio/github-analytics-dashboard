@@ -143,7 +143,7 @@ Only the dashboard at the top updates every night.
 ## Set it up
 
 1. Fork or clone this repo and keep it public.
-2. Add two repository secrets: `GH_TOKEN`, a personal access token with `repo` scope (needed to count private repos), and `USERNAME`, your GitHub username.
+2. Add a repository secret `GH_TOKEN`: a personal access token with `repo` scope (needed to count private repos).
 3. Enable Actions, then run "Update GitHub Analytics Dashboard" once from the Actions tab.
 4. Add the image to your profile README:
 
@@ -151,7 +151,7 @@ Only the dashboard at the top updates every night.
 ![GitHub Analytics](https://raw.githubusercontent.com/YOUR_USERNAME/REPO_NAME/main/data/github_dashboard.svg)
 ```
 
-To run it locally, you need Python 3.11+ and a `.env` with `GITHUB_TOKEN` and `USERNAME`:
+To run it locally, you need Python 3.11+ and a `.env` with `GITHUB_TOKEN`:
 
 ```bash
 python -m venv .venv

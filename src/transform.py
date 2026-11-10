@@ -49,8 +49,6 @@ def repos_to_dataframe(repos):
 
     df["created_at"] = pd.to_datetime(df["created_at"], utc=True)
     df["pushed_at"] = pd.to_datetime(df["pushed_at"], utc=True)
-    df["size_mb"] = df["size_kb"] / 1024
-    df["year_created"] = df["created_at"].dt.year
 
     now = pd.Timestamp.now(tz="UTC")
     df["days_since_last_push"] = (now - df["pushed_at"]).dt.days

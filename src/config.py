@@ -13,7 +13,6 @@ logging.basicConfig(
 load_dotenv()
 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-USERNAME = os.getenv("USERNAME")
 
 if not GITHUB_TOKEN:
     logging.error("GITHUB_TOKEN not found in .env file")

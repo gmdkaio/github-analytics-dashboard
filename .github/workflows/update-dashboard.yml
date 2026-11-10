@@ -30,7 +30,6 @@ jobs:
       - name: Generate dashboard
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          USERNAME: ${{ secrets.USERNAME }}
           DASHBOARD_LAYOUT: ${{ vars.DASHBOARD_LAYOUT || 'card' }}
           DASHBOARD_THEME: ${{ vars.DASHBOARD_THEME }}
           DASHBOARD_GRADIENTS: ${{ vars.DASHBOARD_GRADIENTS || '1' }}
