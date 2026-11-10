@@ -22,3 +22,9 @@ for layout in ("card", "bento", "terminal"):
 create_dashboard(df, str(OUT / "layouts" / "card-flat.svg"), layout="card", gradients=False)
 for theme in THEMES:
     create_dashboard(df, str(OUT / "themes" / f"{theme}.svg"), layout="card", theme=theme)
+
+# every layout in every theme, to compare
+(OUT / "outputs").mkdir(parents=True, exist_ok=True)
+for layout in ("card", "bento", "terminal"):
+    for theme in THEMES:
+        create_dashboard(df, str(OUT / "outputs" / f"{layout}-{theme}.svg"), layout=layout, theme=theme)
