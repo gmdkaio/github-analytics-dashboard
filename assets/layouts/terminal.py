@@ -101,7 +101,8 @@ def render(s, t, path, gradients=True):
                t["text"], url=r["url"])
         c.text(PX + 376, y, (r["language"] or "-").lower(), 14,
                color=R[k] if k is not None else t["muted"])
-        c.text(PX + 506, y, f"[{r['stage'].lower()}]", 14, color=stage_color(t, r["stage"]))
+        if r["stage"]:
+            c.text(PX + 506, y, f"[{r['stage'].lower()}]", 14, color=stage_color(t, r["stage"]))
         c.text(sq_x, y, "■" * min(r["stars"], max_sq), 14, color=t["c2"])
         c.text(W - PX, y, f"★{r['stars']}", 14, "semibold", t["text"], ha="right")
         y += LINE + 2

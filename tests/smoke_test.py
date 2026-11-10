@@ -19,33 +19,33 @@ from transform import lifecycle  # noqa: E402
 year = pd.Timestamp.now(tz="UTC").year
 # name, private, language, stars, stage, created year
 REPOS = [
-    ("secret-project", True, "Python", 50, "Active", year),
-    ("py-one", False, "Python", 3, "Active", year),
-    ("py-two", False, "Python", 0, "Quiet", year - 2),
+    ("secret-project", True, "Python", 50, "In progress", year),
+    ("py-one", False, "Python", 3, None, year),
+    ("py-two", False, "Python", 0, None, year - 2),
     ("go-one", False, "Go", 4, "Finished", year - 1),
-    ("go-two", False, "Go", 1, "Active", year),
+    ("go-two", False, "Go", 1, "In progress", year),
     ("rust-one", False, "Rust", 1, "Dropped", year - 3),
-    ("rust-two", True, "Rust", 0, "Active", year),
+    ("rust-two", True, "Rust", 0, "Finished", year),
     ("ada-one", False, "Ada", 9, "Paused", year - 1),
-    ("c-one", False, "C", 9, "Active", year),
-    ("zig-one", False, "Zig", 9, "Archived", year - 2),
-    ("site", False, "HTML", 2, "Active", year),
+    ("c-one", False, "C", 9, None, year),
+    ("zig-one", False, "Zig", 9, "Finished", year - 2),
+    ("site", False, "HTML", 2, "Dropped", year),
     ("notes", False, None, 0, "In progress", year - 1),
 ]
 df = pd.DataFrame(
     [{"name": n, "url": f"https://github.com/someone/{n}", "private": p, "language": lang,
-      "stars": s, "stage": st, "archived": st == "Archived",
+      "stars": s, "stage": st, "archived": False,
       "created_at": f"{y}-01-15 10:00:00+00:00", "pushed_at": f"{y}-01-20 10:00:00+00:00"}
      for n, p, lang, s, st, y in REPOS]
 )
 
-# status topic wins, archived wins over it, untagged falls back to recency
-def stage(topics, days, archived=False):
-    return lifecycle({"topics": topics, "days_since_last_push": days, "archived": archived})
-assert stage(["python", "finished"], 5) == "Finished"
-assert stage(["wip"], 900) == "In progress"
-assert stage(["finished"], 5, archived=True) == "Archived"
-assert stage([], 30) == "Active" and stage(["python"], 200) == "Quiet"
+# the status topic is the stage; untagged repos have none
+def stage(topics):
+    return lifecycle({"topics": topics})
+assert stage(["python", "finished"]) == "Finished"
+assert stage(["wip"]) == "In progress"
+assert stage(["dropped"]) == "Dropped" and stage(["paused"]) == "Paused"
+assert stage([]) is None and stage(["python"]) is None
 
 # count, then stars, then name; HTML filtered, no-language dropped
 names = [l["name"] for l in snapshot(df).langs]

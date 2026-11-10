@@ -91,7 +91,7 @@ def render(s, t, path, gradients=True):
 
     # --- lifecycle waffle --------------------------------------------------
     x, y, w, h = tile(2, 1, 2, 1)
-    per = max(math.ceil(s.total / 45), 1)
+    per = max(math.ceil(sum(n for _, n in s.stages) / 45), 1)
     unit = "repo" if per == 1 else f"{per} repos"
     c.text(x + 22, y + 22 + 14, f"Lifecycle · one square per {unit}", 16, "semibold", t["text"], family=HEAD)
     lx, ly = x + 22, y + 22 + 14 + 22
@@ -147,10 +147,11 @@ def render(s, t, path, gradients=True):
         name_x = x + 24 + 32 + 16
         c.text(name_x, base, ellipsize(r["name"], pill_x - 10 - name_x, 13, "semibold"),
                13, "semibold", t["text"], url=r["url"])
-        sc = stage_color(t, r["stage"])
-        pw = c.width(r["stage"], 11, "semibold") + 16
-        c.rect(pill_x, base - 14, pw, 20, r=10, ec=sc, lw=1, z=3)
-        c.text(pill_x + 8, base, r["stage"], 11, "semibold", sc)
+        if r["stage"]:
+            sc = stage_color(t, r["stage"])
+            pw = c.width(r["stage"], 11, "semibold") + 16
+            c.rect(pill_x, base - 14, pw, 20, r=10, ec=sc, lw=1, z=3)
+            c.text(pill_x + 8, base, r["stage"], 11, "semibold", sc)
         c.text(x + w - 24, base, f"★ {r['stars']}", 13, "bold", t["text"], ha="right")
 
     c.save(path)

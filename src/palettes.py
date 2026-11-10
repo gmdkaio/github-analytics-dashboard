@@ -3,13 +3,13 @@ Dashboard color themes.
 
 Each theme provides: bg, panel, card, border, text, muted, hero, c2-c5, accent, private.
 `hero` and `c2..c5` are the categorical ramp used for the top 5 languages (rank order),
-leaderboard dots and composition colors; `accent` highlights live repos and the "Active" stage;
+leaderboard dots and composition colors; `accent` highlights live repos (pushed in the last 90 days);
 `private` marks private repos.
 
 Optional keys (new):
   track  -> background of empty bar/progress tracks (falls back to `border`)
   prog   -> lifecycle "In progress" color (falls back to `hero`)
-  stub   -> lifecycle "Quiet" color (falls back to `muted`)
+  stub   -> lifecycle "Dropped" color (falls back to `c5`)
 
 To add a new theme, copy one of the blocks below, tweak the hex values, and give it
 a key. It becomes selectable immediately via DASHBOARD_THEME=<key>.
@@ -112,16 +112,10 @@ DEFAULT_THEME = "divergence"
 
 def stage_color(theme: dict, stage: str) -> str:
     """Lifecycle color with fallbacks for themes that don't define prog/stub."""
-    if stage == "Active":
-        return theme["accent"]
     if stage == "In progress":
         return theme.get("prog", theme["hero"])
     if stage == "Finished":
         return theme["c2"]
     if stage == "Paused":
         return theme["c3"]
-    if stage == "Archived":
-        return theme["c4"]
-    if stage == "Dropped":
-        return theme["c5"]
-    return theme.get("stub", theme["muted"])  # Quiet
+    return theme.get("stub", theme["c5"])  # Dropped

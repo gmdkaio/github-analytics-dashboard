@@ -127,13 +127,13 @@ Only the dashboard at the top updates every night.
 | Show private repos in the leaderboards | `SHOW_PRIVATE = True` in `assets/layouts/common.py`. Their names then appear in the public SVG. |
 | Count forks | Remove the fork filter in `src/transform.py`. |
 | Mark a repo's status | Add one topic to the repo on GitHub: `wip`, `paused`, `finished` or `dropped`. No code change. |
-| Change the status topics or the 90-day cutoff | `STATUS_TOPICS` and `lifecycle()` in `src/transform.py`. |
+| Change the status topics | `STATUS_TOPICS` in `src/transform.py`. |
 | Add a theme | Copy a block in `src/palettes.py` and change the colors. `track`, `prog` and `stub` are optional. |
 | Change the update time | The `cron` line in `.github/workflows/update-dashboard.yml` (daily at 00:00 UTC). |
 
 ## How the numbers work
 
-- Lifecycle comes from a status topic you set on each repo: `wip` is In progress, `paused` is Paused, `finished` is Finished, `dropped` is Dropped. An archived repo is always Archived. Untagged repos fall back to recency: Active if pushed in the last 90 days, Quiet after that.
+- Lifecycle comes from a status topic you set on each repo: `wip` is In progress, `paused` is Paused, `finished` is Finished, `dropped` is Dropped. Untagged repos still count in the totals but stay out of the lifecycle charts.
 - Live repos counts every repo pushed in the last 90 days, whatever its tag.
 - Only repos you own are counted: no forks, no organization or collaborator repos.
 - Top languages: repos with no language or a filtered one are dropped, the rest are counted per language and sorted by count, then total stars, then name, so ties always land in the same order. Everything past `TOP_N` goes into "Other". Percentages are of the counted repos, rounded, so they may not add up to exactly 100.

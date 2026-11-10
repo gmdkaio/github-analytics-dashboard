@@ -48,7 +48,7 @@ FILTERED_LANGS = {"HTML", "CSS", "JavaScript"}
 # README. Set to True to include private repos too.
 SHOW_PRIVATE = False
 
-STAGE_ORDER = ["Active", "In progress", "Paused", "Finished", "Quiet", "Dropped", "Archived"]
+STAGE_ORDER = ["Finished", "In progress", "Paused", "Dropped"]
 
 
 # --------------------------------------------------------------------------
@@ -160,7 +160,7 @@ def snapshot(df, now=None):
     leaderboard = [
         {"name": r.name, "url": r.url, "stars": int(r.stars),
          "language": r.language if isinstance(r.language, str) else None,
-         "stage": r.stage}
+         "stage": r.stage if isinstance(r.stage, str) else None}
         for r in board.itertuples()
     ]
 
