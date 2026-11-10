@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 
-from config import CSV_OUTPUT, DASHBOARD_OUTPUT, THEME
+from config import CSV_OUTPUT, DASHBOARD_OUTPUT, GRADIENTS, LAYOUT, THEME
 from extract import get_repositories
 from transform import repos_to_dataframe
 
@@ -29,7 +29,8 @@ def main():
     df.to_csv(CSV_OUTPUT, index=False)
     
     logger.info("Generating dashboard...")
-    create_dashboard(df, output_path=DASHBOARD_OUTPUT, theme=THEME)
+    create_dashboard(df, output_path=DASHBOARD_OUTPUT, theme=THEME,
+                     layout=LAYOUT, gradients=GRADIENTS)
     logger.info(f"Complete! {DASHBOARD_OUTPUT}")
 
 
