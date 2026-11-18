@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-11-17T05:53:36.821628</dc:date>
+    <dc:date>2026-11-18T05:21:26.835052</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -36,27 +36,27 @@ L 1156 187.4
 L 44 187.4 
 L 44 105.4 
 z
-" clip-path="url(#pee6f7a8e8e)" style="fill: none; stroke: #262626; stroke-linejoin: miter"/>
+" clip-path="url(#pd765657292)" style="fill: none; stroke: #262626; stroke-linejoin: miter"/>
    </g>
    <g id="line2d_1">
     <path d="M 266.4 105.4 
 L 266.4 187.4 
-" clip-path="url(#pee6f7a8e8e)" style="fill: none; stroke: #262626; stroke-linecap: square"/>
+" clip-path="url(#pd765657292)" style="fill: none; stroke: #262626; stroke-linecap: square"/>
    </g>
    <g id="line2d_2">
     <path d="M 488.8 105.4 
 L 488.8 187.4 
-" clip-path="url(#pee6f7a8e8e)" style="fill: none; stroke: #262626; stroke-linecap: square"/>
+" clip-path="url(#pd765657292)" style="fill: none; stroke: #262626; stroke-linecap: square"/>
    </g>
    <g id="line2d_3">
     <path d="M 711.2 105.4 
 L 711.2 187.4 
-" clip-path="url(#pee6f7a8e8e)" style="fill: none; stroke: #262626; stroke-linecap: square"/>
+" clip-path="url(#pd765657292)" style="fill: none; stroke: #262626; stroke-linecap: square"/>
    </g>
    <g id="line2d_4">
     <path d="M 933.6 105.4 
 L 933.6 187.4 
-" clip-path="url(#pee6f7a8e8e)" style="fill: none; stroke: #262626; stroke-linecap: square"/>
+" clip-path="url(#pd765657292)" style="fill: none; stroke: #262626; stroke-linecap: square"/>
    </g>
    <g id="patch_3">
     <path d="M 195.2 646 
@@ -64,7 +64,7 @@ L 204.2 646
 L 204.2 663 
 L 195.2 663 
 z
-" clip-path="url(#pee6f7a8e8e)" style="fill: #ffffff"/>
+" clip-path="url(#pd765657292)" style="fill: #ffffff"/>
    </g>
    <g id="text_1">
     <!-- gmdkaio@github -->
@@ -851,7 +851,7 @@ z
     </g>
    </g>
    <g id="text_4">
-    <!-- snapshot 2026-11-17 · 42 repos scanned · 0 archived -->
+    <!-- snapshot 2026-11-18 · 42 repos scanned · 0 archived -->
     <g style="fill: #8c8c8c" transform="translate(44 77.7) scale(0.14 -0.14)">
      <defs>
       <path id="JetBrainsMono-Regular-2e3" d="M 550 0 
@@ -956,16 +956,49 @@ L 3456 0
 L 576 0 
 z
 " transform="scale(0.015625)"/>
-      <path id="JetBrainsMono-Regular-2e8" d="M 1216 0 
-L 2880 4147 
-L 1101 4147 
-L 1101 3392 
-L 525 3392 
-L 525 4672 
-L 3494 4672 
-L 3494 4134 
-L 1843 0 
-L 1216 0 
+      <path id="JetBrainsMono-Regular-2e9" d="M 1920 -64 
+Q 1478 -64 1139 109 
+Q 800 282 611 592 
+Q 422 902 422 1306 
+Q 422 1747 675 2067 
+Q 928 2387 1350 2458 
+L 1350 2477 
+Q 986 2560 768 2845 
+Q 550 3130 550 3501 
+Q 550 3866 723 4144 
+Q 896 4422 1206 4579 
+Q 1517 4736 1920 4736 
+Q 2330 4736 2637 4579 
+Q 2944 4422 3117 4144 
+Q 3290 3866 3290 3501 
+Q 3290 3130 3072 2845 
+Q 2854 2560 2490 2477 
+L 2490 2458 
+Q 2912 2387 3165 2067 
+Q 3418 1747 3418 1306 
+Q 3418 902 3229 592 
+Q 3040 282 2704 109 
+Q 2368 -64 1920 -64 
+z
+M 1920 2701 
+Q 2278 2701 2496 2912 
+Q 2714 3123 2714 3462 
+Q 2714 3802 2496 4013 
+Q 2278 4224 1920 4224 
+Q 1568 4224 1347 4013 
+Q 1126 3802 1126 3462 
+Q 1126 3123 1347 2912 
+Q 1568 2701 1920 2701 
+z
+M 1920 454 
+Q 2330 454 2586 694 
+Q 2842 934 2842 1318 
+Q 2842 1709 2586 1949 
+Q 2330 2189 1920 2189 
+Q 1510 2189 1254 1949 
+Q 998 1709 998 1318 
+Q 998 934 1254 694 
+Q 1510 454 1920 454 
 z
 " transform="scale(0.015625)"/>
       <path id="JetBrainsMono-Regular-395" d="M 1920 1664 
@@ -1027,7 +1060,7 @@ z
      <use xlink:href="#JetBrainsMono-Regular-2e2" transform="translate(900 0)"/>
      <use xlink:href="#JetBrainsMono-Regular-3a6" transform="translate(960 0)"/>
      <use xlink:href="#JetBrainsMono-Regular-2e2" transform="translate(1020 0)"/>
-     <use xlink:href="#JetBrainsMono-Regular-2e8" transform="translate(1080 0)"/>
+     <use xlink:href="#JetBrainsMono-Regular-2e9" transform="translate(1080 0)"/>
      <use xlink:href="#JetBrainsMono-Regular-335" transform="translate(1140 0)"/>
      <use xlink:href="#JetBrainsMono-Regular-395" transform="translate(1200 0)"/>
      <use xlink:href="#JetBrainsMono-Regular-335" transform="translate(1260 0)"/>
@@ -1177,26 +1210,51 @@ z
     </g>
    </g>
    <g id="text_9">
-    <!-- 21 -->
+    <!-- 20 -->
     <g style="fill: #ffffff" transform="translate(506.8 146.4) scale(0.3 -0.3)">
      <defs>
-      <path id="JetBrainsMono-ExtraBold-2e2" d="M 512 0 
-L 512 864 
-L 1690 864 
-L 1690 3699 
-L 499 2842 
-L 499 3904 
-L 1594 4672 
-L 2650 4672 
-L 2650 864 
-L 3584 864 
-L 3584 0 
-L 512 0 
+      <path id="JetBrainsMono-ExtraBold-2e1" d="M 1920 -64 
+Q 1453 -64 1107 112 
+Q 762 288 573 605 
+Q 384 922 384 1344 
+L 384 3328 
+Q 384 3750 573 4067 
+Q 762 4384 1107 4560 
+Q 1453 4736 1920 4736 
+Q 2394 4736 2736 4560 
+Q 3078 4384 3267 4067 
+Q 3456 3750 3456 3328 
+L 3456 1344 
+Q 3456 922 3267 605 
+Q 3078 288 2736 112 
+Q 2394 -64 1920 -64 
+z
+M 1920 768 
+Q 2221 768 2390 921 
+Q 2560 1075 2560 1344 
+L 2560 3328 
+Q 2560 3597 2390 3750 
+Q 2221 3904 1920 3904 
+Q 1619 3904 1449 3750 
+Q 1280 3597 1280 3328 
+L 1280 1344 
+Q 1280 1075 1453 921 
+Q 1626 768 1920 768 
+z
+M 1920 1926 
+Q 1722 1926 1597 2038 
+Q 1472 2150 1472 2355 
+Q 1472 2560 1597 2665 
+Q 1722 2771 1920 2771 
+Q 2125 2771 2246 2665 
+Q 2368 2560 2368 2355 
+Q 2368 2150 2246 2038 
+Q 2125 1926 1920 1926 
 z
 " transform="scale(0.015625)"/>
      </defs>
      <use xlink:href="#JetBrainsMono-ExtraBold-2e3"/>
-     <use xlink:href="#JetBrainsMono-ExtraBold-2e2" transform="translate(60 0)"/>
+     <use xlink:href="#JetBrainsMono-ExtraBold-2e1" transform="translate(60 0)"/>
     </g>
    </g>
    <g id="text_10">
@@ -1306,6 +1364,20 @@ L 1312 -704
 L 320 -704 
 z
 " transform="scale(0.015625)"/>
+      <path id="JetBrainsMono-ExtraBold-2e2" d="M 512 0 
+L 512 864 
+L 1690 864 
+L 1690 3699 
+L 499 2842 
+L 499 3904 
+L 1594 4672 
+L 2650 4672 
+L 2650 864 
+L 3584 864 
+L 3584 0 
+L 512 0 
+z
+" transform="scale(0.015625)"/>
       <path id="JetBrainsMono-ExtraBold-2e9" d="M 1920 -64 
 Q 1434 -64 1066 112 
 Q 698 288 490 605 
@@ -1392,47 +1464,6 @@ z
    <g id="text_13">
     <!-- 10 -->
     <g style="fill: #969696" transform="translate(951.6 146.4) scale(0.3 -0.3)">
-     <defs>
-      <path id="JetBrainsMono-ExtraBold-2e1" d="M 1920 -64 
-Q 1453 -64 1107 112 
-Q 762 288 573 605 
-Q 384 922 384 1344 
-L 384 3328 
-Q 384 3750 573 4067 
-Q 762 4384 1107 4560 
-Q 1453 4736 1920 4736 
-Q 2394 4736 2736 4560 
-Q 3078 4384 3267 4067 
-Q 3456 3750 3456 3328 
-L 3456 1344 
-Q 3456 922 3267 605 
-Q 3078 288 2736 112 
-Q 2394 -64 1920 -64 
-z
-M 1920 768 
-Q 2221 768 2390 921 
-Q 2560 1075 2560 1344 
-L 2560 3328 
-Q 2560 3597 2390 3750 
-Q 2221 3904 1920 3904 
-Q 1619 3904 1449 3750 
-Q 1280 3597 1280 3328 
-L 1280 1344 
-Q 1280 1075 1453 921 
-Q 1626 768 1920 768 
-z
-M 1920 1926 
-Q 1722 1926 1597 2038 
-Q 1472 2150 1472 2355 
-Q 1472 2560 1597 2665 
-Q 1722 2771 1920 2771 
-Q 2125 2771 2246 2665 
-Q 2368 2560 2368 2355 
-Q 2368 2150 2246 2038 
-Q 2125 1926 1920 1926 
-z
-" transform="scale(0.015625)"/>
-     </defs>
      <use xlink:href="#JetBrainsMono-ExtraBold-2e2"/>
      <use xlink:href="#JetBrainsMono-ExtraBold-2e1" transform="translate(60 0)"/>
     </g>
@@ -1706,7 +1737,7 @@ z
     </g>
    </g>
    <g id="text_16">
-    <!-- top 5 of 33 -->
+    <!-- top 5 of 34 -->
     <g style="fill: #8c8c8c" transform="translate(153.2 225.4) scale(0.14 -0.14)">
      <defs>
       <path id="JetBrainsMono-Regular-2e4" d="M 1850 -64 
@@ -1746,7 +1777,7 @@ z
      <use xlink:href="#JetBrainsMono-Regular-fe" transform="translate(420 0)"/>
      <use xlink:href="#JetBrainsMono-Regular-335" transform="translate(480 0)"/>
      <use xlink:href="#JetBrainsMono-Regular-2e4" transform="translate(540 0)"/>
-     <use xlink:href="#JetBrainsMono-Regular-2e4" transform="translate(600 0)"/>
+     <use xlink:href="#JetBrainsMono-Regular-2e5" transform="translate(600 0)"/>
     </g>
    </g>
    <g id="text_17">
@@ -1824,12 +1855,26 @@ z
    <g id="text_19">
     <!-- 17 -->
     <g style="fill: #f2f2f2" transform="translate(538.316279 253.1) scale(0.14 -0.14)">
+     <defs>
+      <path id="JetBrainsMono-Regular-2e8" d="M 1216 0 
+L 2880 4147 
+L 1101 4147 
+L 1101 3392 
+L 525 3392 
+L 525 4672 
+L 3494 4672 
+L 3494 4134 
+L 1843 0 
+L 1216 0 
+z
+" transform="scale(0.015625)"/>
+     </defs>
      <use xlink:href="#JetBrainsMono-Regular-2e2"/>
      <use xlink:href="#JetBrainsMono-Regular-2e8" transform="translate(60 0)"/>
     </g>
    </g>
    <g id="text_20">
-    <!-- 52% -->
+    <!-- 50% -->
     <g style="fill: #8c8c8c" transform="translate(587.916279 253.1) scale(0.14 -0.14)">
      <defs>
       <path id="JetBrainsMono-Regular-543" d="M 979 2560 
@@ -1889,7 +1934,7 @@ z
 " transform="scale(0.015625)"/>
      </defs>
      <use xlink:href="#JetBrainsMono-Regular-2e6"/>
-     <use xlink:href="#JetBrainsMono-Regular-2e3" transform="translate(60 0)"/>
+     <use xlink:href="#JetBrainsMono-Regular-2e1" transform="translate(60 0)"/>
      <use xlink:href="#JetBrainsMono-Regular-543" transform="translate(120 0)"/>
     </g>
    </g>
@@ -2013,61 +2058,20 @@ z
     </g>
    </g>
    <g id="text_29">
-    <!-- R -->
+    <!-- TypeScript -->
     <g style="fill: #f2f2f2" transform="translate(44 330.2) scale(0.14 -0.14)">
      <defs>
-      <path id="JetBrainsMono-Regular-82" d="M 595 0 
-L 595 4672 
-L 2035 4672 
-Q 2451 4672 2764 4502 
-Q 3078 4333 3251 4032 
-Q 3424 3731 3424 3328 
-Q 3424 2854 3181 2515 
-Q 2938 2176 2534 2042 
-L 3488 0 
-L 2854 0 
-L 1939 1984 
-L 1165 1984 
-L 1165 0 
-L 595 0 
-z
-M 1165 2502 
-L 2035 2502 
-Q 2394 2502 2611 2729 
-Q 2829 2957 2829 3328 
-Q 2829 3706 2611 3930 
-Q 2394 4154 2035 4154 
-L 1165 4154 
-L 1165 2502 
+      <path id="JetBrainsMono-Regular-8d" d="M 1632 0 
+L 1632 4147 
+L 352 4147 
+L 352 4672 
+L 3488 4672 
+L 3488 4147 
+L 2208 4147 
+L 2208 0 
+L 1632 0 
 z
 " transform="scale(0.015625)"/>
-     </defs>
-     <use xlink:href="#JetBrainsMono-Regular-82"/>
-    </g>
-   </g>
-   <g id="text_30">
-    <!-- █ -->
-    <g style="fill: #6b6b6b" transform="translate(224 330.2) scale(0.14 -0.14)">
-     <use xlink:href="#JetBrainsMono-Regular-5ac"/>
-    </g>
-   </g>
-   <g id="text_31">
-    <!-- 1 -->
-    <g style="fill: #f2f2f2" transform="translate(546.716279 330.2) scale(0.14 -0.14)">
-     <use xlink:href="#JetBrainsMono-Regular-2e2"/>
-    </g>
-   </g>
-   <g id="text_32">
-    <!-- 3% -->
-    <g style="fill: #8c8c8c" transform="translate(596.316279 330.2) scale(0.14 -0.14)">
-     <use xlink:href="#JetBrainsMono-Regular-2e4"/>
-     <use xlink:href="#JetBrainsMono-Regular-543" transform="translate(60 0)"/>
-    </g>
-   </g>
-   <g id="text_33">
-    <!-- Svelte -->
-    <g style="fill: #f2f2f2" transform="translate(44 355.9) scale(0.14 -0.14)">
-     <defs>
       <path id="JetBrainsMono-Regular-86" d="M 1946 -64 
 Q 1267 -64 864 294 
 Q 461 653 461 1280 
@@ -2102,12 +2106,70 @@ Q 2598 -64 1946 -64
 z
 " transform="scale(0.015625)"/>
      </defs>
-     <use xlink:href="#JetBrainsMono-Regular-86"/>
-     <use xlink:href="#JetBrainsMono-Regular-175" transform="translate(60 0)"/>
-     <use xlink:href="#JetBrainsMono-Regular-ea" transform="translate(120 0)"/>
-     <use xlink:href="#JetBrainsMono-Regular-11f" transform="translate(180 0)"/>
-     <use xlink:href="#JetBrainsMono-Regular-158" transform="translate(240 0)"/>
-     <use xlink:href="#JetBrainsMono-Regular-ea" transform="translate(300 0)"/>
+     <use xlink:href="#JetBrainsMono-Regular-8d"/>
+     <use xlink:href="#JetBrainsMono-Regular-17c" transform="translate(60 0)"/>
+     <use xlink:href="#JetBrainsMono-Regular-149" transform="translate(120 0)"/>
+     <use xlink:href="#JetBrainsMono-Regular-ea" transform="translate(180 0)"/>
+     <use xlink:href="#JetBrainsMono-Regular-86" transform="translate(240 0)"/>
+     <use xlink:href="#JetBrainsMono-Regular-e0" transform="translate(300 0)"/>
+     <use xlink:href="#JetBrainsMono-Regular-14c" transform="translate(360 0)"/>
+     <use xlink:href="#JetBrainsMono-Regular-109" transform="translate(420 0)"/>
+     <use xlink:href="#JetBrainsMono-Regular-149" transform="translate(480 0)"/>
+     <use xlink:href="#JetBrainsMono-Regular-158" transform="translate(540 0)"/>
+    </g>
+   </g>
+   <g id="text_30">
+    <!-- ███ -->
+    <g style="fill: #6b6b6b" transform="translate(224 330.2) scale(0.14 -0.14)">
+     <use xlink:href="#JetBrainsMono-Regular-5ac"/>
+     <use xlink:href="#JetBrainsMono-Regular-5ac" transform="translate(60 0)"/>
+     <use xlink:href="#JetBrainsMono-Regular-5ac" transform="translate(120 0)"/>
+    </g>
+   </g>
+   <g id="text_31">
+    <!-- 2 -->
+    <g style="fill: #f2f2f2" transform="translate(546.716279 330.2) scale(0.14 -0.14)">
+     <use xlink:href="#JetBrainsMono-Regular-2e3"/>
+    </g>
+   </g>
+   <g id="text_32">
+    <!-- 6% -->
+    <g style="fill: #8c8c8c" transform="translate(596.316279 330.2) scale(0.14 -0.14)">
+     <use xlink:href="#JetBrainsMono-Regular-2e7"/>
+     <use xlink:href="#JetBrainsMono-Regular-543" transform="translate(60 0)"/>
+    </g>
+   </g>
+   <g id="text_33">
+    <!-- R -->
+    <g style="fill: #f2f2f2" transform="translate(44 355.9) scale(0.14 -0.14)">
+     <defs>
+      <path id="JetBrainsMono-Regular-82" d="M 595 0 
+L 595 4672 
+L 2035 4672 
+Q 2451 4672 2764 4502 
+Q 3078 4333 3251 4032 
+Q 3424 3731 3424 3328 
+Q 3424 2854 3181 2515 
+Q 2938 2176 2534 2042 
+L 3488 0 
+L 2854 0 
+L 1939 1984 
+L 1165 1984 
+L 1165 0 
+L 595 0 
+z
+M 1165 2502 
+L 2035 2502 
+Q 2394 2502 2611 2729 
+Q 2829 2957 2829 3328 
+Q 2829 3706 2611 3930 
+Q 2394 4154 2035 4154 
+L 1165 4154 
+L 1165 2502 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#JetBrainsMono-Regular-82"/>
     </g>
    </g>
    <g id="text_34">
@@ -4922,7 +4984,7 @@ z
    </g>
    <g id="text_95">
     <!-- r -->
-    <g style="fill: #6b6b6b" transform="translate(420 540.7) scale(0.14 -0.14)">
+    <g style="fill: #4d4d4d" transform="translate(420 540.7) scale(0.14 -0.14)">
      <use xlink:href="#JetBrainsMono-Regular-14c"/>
     </g>
    </g>
@@ -5180,7 +5242,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="pee6f7a8e8e">
+  <clipPath id="pd765657292">
    <rect x="0" y="0" width="1200" height="700"/>
   </clipPath>
  </defs>
