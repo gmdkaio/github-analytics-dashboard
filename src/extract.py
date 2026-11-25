@@ -36,4 +36,21 @@ def get_repositories():
             raise
 
     logger.info(f"Total repositories: {len(repos)}")
+    for repo in repos:
+        if repo.get("fork"):
+            repo["contributed"] = merged_upstream(repo)
     return repos
+
+
+def merged_upstream(fork):
+    """True if the parent is public and the fork's owner got a PR merged into it."""
+    detail = requests.get(fork["url"], headers=HEADERS, timeout=30)
+    detail.raise_for_status()
+    parent = detail.json().get("parent") or {}
+    if not parent or parent.get("private"):
+        return False
+    q = f"is:pr is:merged author:{fork['owner']['login']} repo:{parent['full_name']}"
+    search = requests.get(f"{BASE_URL}/search/issues", headers=HEADERS,
+                          params={"q": q, "per_page": 1}, timeout=30)
+    search.raise_for_status()
+    return search.json()["total_count"] > 0

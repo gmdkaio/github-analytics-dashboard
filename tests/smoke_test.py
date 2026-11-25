@@ -14,7 +14,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "src"))
 from assets.dashboard import LAYOUTS, create_dashboard  # noqa: E402
 from assets.layouts.common import SHOW_PRIVATE, THEMES, TOP_N, snapshot  # noqa: E402
-from transform import lifecycle  # noqa: E402
+from transform import lifecycle, repos_to_dataframe  # noqa: E402
 
 year = pd.Timestamp.now(tz="UTC").year
 # name, private, language, stars, stage, created year
@@ -46,6 +46,17 @@ assert stage(["python", "finished"]) == "Finished"
 assert stage(["wip"]) == "In progress"
 assert stage(["dropped"]) == "Dropped" and stage(["paused"]) == "Paused"
 assert stage([]) is None and stage(["python"]) is None
+
+# forks count only with a merged PR upstream
+def raw(name, **kw):
+    return {"name": name, "created_at": "2024-01-01T00:00:00Z",
+            "pushed_at": "2024-02-01T00:00:00Z", **kw}
+kept = repos_to_dataframe([
+    raw("own"),
+    raw("merged-fork", fork=True, contributed=True),
+    raw("plain-fork", fork=True, contributed=False),
+])["name"].tolist()
+assert kept == ["own", "merged-fork"], kept
 
 # count, then stars, then name; HTML filtered, no-language dropped
 names = [l["name"] for l in snapshot(df).langs]

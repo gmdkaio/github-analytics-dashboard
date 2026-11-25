@@ -36,6 +36,7 @@ def repos_to_dataframe(repos):
             "created_at": repo.get("created_at"),
             "pushed_at": repo.get("pushed_at"),
             "fork": repo.get("fork", False),
+            "contributed": repo.get("contributed", False),
             "description": repo.get("description") or "",
             "is_template": repo.get("is_template", False),
             "topics": repo.get("topics", []),
@@ -52,12 +53,10 @@ def repos_to_dataframe(repos):
     df["days_since_last_push"] = (now - df["pushed_at"]).dt.days
     df["is_active"] = df["days_since_last_push"] < 90
 
-    # Exclude forks: this dashboard reports on the user's own work, not
-    # repos they merely forked from someone else.
-    forks_dropped = int(df["fork"].sum())
-    df = df[~df["fork"]].reset_index(drop=True)
-    if forks_dropped:
-        logger.info(f"Excluded {forks_dropped} forked repositories")
+    # a fork counts only as an open source contribution: a merged PR into a public parent
+    dropped = df["fork"] & ~df["contributed"]
+    df = df[~dropped].reset_index(drop=True)
+    logger.info(f"Forks: {int(df['fork'].sum())} kept, {int(dropped.sum())} left out")
 
     df["stage"] = df.apply(lifecycle, axis=1)
 

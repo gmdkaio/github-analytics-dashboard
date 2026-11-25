@@ -2,7 +2,7 @@
 
 A dashboard of your GitHub repos, drawn as an SVG for your profile README.
 A GitHub Action fetches your repos every night, draws the picture and commits it,
-so the image above is always about a day old. Only repos you own count, and forks are left out.
+so the image above is always about a day old. Only repos you own count, plus forks where you got a pull request merged upstream.
 
 ## Layouts
 
@@ -125,7 +125,7 @@ Only the dashboard at the top updates every night.
 | List more or fewer languages | `TOP_N` in `assets/layouts/common.py`. Colors repeat after 5. The card fits about 10 rows, bento and terminal about 7. |
 | Exclude or include languages | `FILTERED_LANGS` in `assets/layouts/common.py`. HTML, CSS and JavaScript are left out by default because they are usually a side effect of a repo, not what it is written in. |
 | Show private repos in the leaderboards | `SHOW_PRIVATE = True` in `assets/layouts/common.py`. Their names then appear in the public SVG. |
-| Count forks | Remove the fork filter in `src/transform.py`. |
+| Count every fork, or none | The fork filter in `src/transform.py`. |
 | Mark a repo's status | Add one topic to the repo on GitHub: `wip`, `paused`, `finished` or `dropped`. No code change. |
 | Change the status topics | `STATUS_TOPICS` in `src/transform.py`. |
 | Add a theme | Copy a block in `src/palettes.py` and change the colors. `track`, `prog` and `stub` are optional. |
@@ -135,7 +135,8 @@ Only the dashboard at the top updates every night.
 
 - Lifecycle comes from a status topic you set on each repo: `wip` is In progress, `paused` is Paused, `finished` is Finished, `dropped` is Dropped. Untagged repos still count in the totals but stay out of the lifecycle charts.
 - Live repos counts every repo pushed in the last 90 days, whatever its tag.
-- Only repos you own are counted: no forks, no organization or collaborator repos.
+- Only repos you own are counted, not organization or collaborator repos.
+- A fork counts when its parent repo is public and you have at least one merged pull request into it. Other forks stay out, including forks of private repos, since those are private work rather than open source.
 - Top languages: repos with no language or a filtered one are dropped, the rest are counted per language and sorted by count, then total stars, then name, so ties always land in the same order. Everything past `TOP_N` goes into "Other". Percentages are of the counted repos, rounded, so they may not add up to exactly 100.
 - Last push by month counts repos by the month of their latest push, which is not the same as commit activity.
 - Counts include private repos; names don't. The CSV the pipeline writes (`data/github_repos_clean.csv`) has every repo name, so it stays on your machine and out of git.
