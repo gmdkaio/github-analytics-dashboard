@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-11-25T14:40:57.049956</dc:date>
+    <dc:date>2026-11-25T17:22:48.019695</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -36,27 +36,27 @@ L 1156 187.4
 L 44 187.4 
 L 44 105.4 
 z
-" clip-path="url(#p06b26574d9)" style="fill: none; stroke: #262626; stroke-linejoin: miter"/>
+" clip-path="url(#p546cf19ed5)" style="fill: none; stroke: #262626; stroke-linejoin: miter"/>
    </g>
    <g id="line2d_1">
     <path d="M 266.4 105.4 
 L 266.4 187.4 
-" clip-path="url(#p06b26574d9)" style="fill: none; stroke: #262626; stroke-linecap: square"/>
+" clip-path="url(#p546cf19ed5)" style="fill: none; stroke: #262626; stroke-linecap: square"/>
    </g>
    <g id="line2d_2">
     <path d="M 488.8 105.4 
 L 488.8 187.4 
-" clip-path="url(#p06b26574d9)" style="fill: none; stroke: #262626; stroke-linecap: square"/>
+" clip-path="url(#p546cf19ed5)" style="fill: none; stroke: #262626; stroke-linecap: square"/>
    </g>
    <g id="line2d_3">
     <path d="M 711.2 105.4 
 L 711.2 187.4 
-" clip-path="url(#p06b26574d9)" style="fill: none; stroke: #262626; stroke-linecap: square"/>
+" clip-path="url(#p546cf19ed5)" style="fill: none; stroke: #262626; stroke-linecap: square"/>
    </g>
    <g id="line2d_4">
     <path d="M 933.6 105.4 
 L 933.6 187.4 
-" clip-path="url(#p06b26574d9)" style="fill: none; stroke: #262626; stroke-linecap: square"/>
+" clip-path="url(#p546cf19ed5)" style="fill: none; stroke: #262626; stroke-linecap: square"/>
    </g>
    <g id="patch_3">
     <path d="M 195.2 646 
@@ -64,7 +64,7 @@ L 204.2 646
 L 204.2 663 
 L 195.2 663 
 z
-" clip-path="url(#p06b26574d9)" style="fill: #ffffff"/>
+" clip-path="url(#p546cf19ed5)" style="fill: #ffffff"/>
    </g>
    <g id="text_1">
     <!-- gmdkaio@github -->
@@ -1294,9 +1294,51 @@ z
     </g>
    </g>
    <g id="text_11">
-    <!-- 25/20 -->
+    <!-- 16/29 -->
     <g style="fill: #f2f2f2" transform="translate(729.2 146.4) scale(0.3 -0.3)">
      <defs>
+      <path id="JetBrainsMono-ExtraBold-2e2" d="M 512 0 
+L 512 864 
+L 1690 864 
+L 1690 3699 
+L 499 2842 
+L 499 3904 
+L 1594 4672 
+L 2650 4672 
+L 2650 864 
+L 3584 864 
+L 3584 0 
+L 512 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="JetBrainsMono-ExtraBold-2e7" d="M 1920 -64 
+Q 1421 -64 1053 131 
+Q 685 326 486 681 
+Q 288 1037 288 1523 
+Q 288 1786 409 2157 
+Q 531 2528 742 2912 
+L 1702 4672 
+L 2797 4672 
+L 1562 2573 
+L 1594 2554 
+Q 1702 2714 1897 2803 
+Q 2093 2893 2330 2893 
+Q 2893 2893 3222 2509 
+Q 3552 2125 3552 1466 
+Q 3552 762 3113 349 
+Q 2675 -64 1920 -64 
+z
+M 1920 736 
+Q 2240 736 2429 928 
+Q 2618 1120 2618 1453 
+Q 2618 1792 2429 1987 
+Q 2240 2182 1920 2182 
+Q 1600 2182 1411 1987 
+Q 1222 1792 1222 1453 
+Q 1222 1120 1411 928 
+Q 1600 736 1920 736 
+z
+" transform="scale(0.015625)"/>
       <path id="JetBrainsMono-ExtraBold-3a0" d="M 320 -704 
 L 2528 5312 
 L 3520 5312 
@@ -1304,51 +1346,40 @@ L 1312 -704
 L 320 -704 
 z
 " transform="scale(0.015625)"/>
-      <path id="JetBrainsMono-ExtraBold-2e1" d="M 1920 -64 
-Q 1453 -64 1107 112 
-Q 762 288 573 605 
-Q 384 922 384 1344 
-L 384 3328 
-Q 384 3750 573 4067 
-Q 762 4384 1107 4560 
-Q 1453 4736 1920 4736 
-Q 2394 4736 2736 4560 
-Q 3078 4384 3267 4067 
-Q 3456 3750 3456 3328 
-L 3456 1344 
-Q 3456 922 3267 605 
-Q 3078 288 2736 112 
-Q 2394 -64 1920 -64 
+      <path id="JetBrainsMono-ExtraBold-2ea" d="M 1024 0 
+L 2074 1798 
+Q 2022 1766 1955 1740 
+Q 1888 1715 1702 1715 
+Q 1331 1715 1008 1904 
+Q 685 2093 486 2432 
+Q 288 2771 288 3206 
+Q 288 3910 726 4323 
+Q 1165 4736 1920 4736 
+Q 2426 4736 2790 4541 
+Q 3155 4346 3353 3990 
+Q 3552 3635 3552 3149 
+Q 3552 2893 3430 2518 
+Q 3309 2144 3098 1760 
+L 2138 0 
+L 1024 0 
 z
-M 1920 768 
-Q 2221 768 2390 921 
-Q 2560 1075 2560 1344 
-L 2560 3328 
-Q 2560 3597 2390 3750 
-Q 2221 3904 1920 3904 
-Q 1619 3904 1449 3750 
-Q 1280 3597 1280 3328 
-L 1280 1344 
-Q 1280 1075 1453 921 
-Q 1626 768 1920 768 
-z
-M 1920 1926 
-Q 1722 1926 1597 2038 
-Q 1472 2150 1472 2355 
-Q 1472 2560 1597 2665 
-Q 1722 2771 1920 2771 
-Q 2125 2771 2246 2665 
-Q 2368 2560 2368 2355 
-Q 2368 2150 2246 2038 
-Q 2125 1926 1920 1926 
+M 1920 2490 
+Q 2240 2490 2429 2688 
+Q 2618 2886 2618 3219 
+Q 2618 3552 2429 3744 
+Q 2240 3936 1920 3936 
+Q 1600 3936 1411 3744 
+Q 1222 3552 1222 3219 
+Q 1222 2886 1411 2688 
+Q 1600 2490 1920 2490 
 z
 " transform="scale(0.015625)"/>
      </defs>
-     <use xlink:href="#JetBrainsMono-ExtraBold-2e3"/>
-     <use xlink:href="#JetBrainsMono-ExtraBold-2e6" transform="translate(60 0)"/>
+     <use xlink:href="#JetBrainsMono-ExtraBold-2e2"/>
+     <use xlink:href="#JetBrainsMono-ExtraBold-2e7" transform="translate(60 0)"/>
      <use xlink:href="#JetBrainsMono-ExtraBold-3a0" transform="translate(120 0)"/>
      <use xlink:href="#JetBrainsMono-ExtraBold-2e3" transform="translate(180 0)"/>
-     <use xlink:href="#JetBrainsMono-ExtraBold-2e1" transform="translate(240 0)"/>
+     <use xlink:href="#JetBrainsMono-ExtraBold-2ea" transform="translate(240 0)"/>
     </g>
    </g>
    <g id="text_12">
@@ -1380,26 +1411,10 @@ z
     </g>
    </g>
    <g id="text_13">
-    <!-- 13 -->
+    <!-- 14 -->
     <g style="fill: #969696" transform="translate(951.6 146.4) scale(0.3 -0.3)">
-     <defs>
-      <path id="JetBrainsMono-ExtraBold-2e2" d="M 512 0 
-L 512 864 
-L 1690 864 
-L 1690 3699 
-L 499 2842 
-L 499 3904 
-L 1594 4672 
-L 2650 4672 
-L 2650 864 
-L 3584 864 
-L 3584 0 
-L 512 0 
-z
-" transform="scale(0.015625)"/>
-     </defs>
      <use xlink:href="#JetBrainsMono-ExtraBold-2e2"/>
-     <use xlink:href="#JetBrainsMono-ExtraBold-2e4" transform="translate(60 0)"/>
+     <use xlink:href="#JetBrainsMono-ExtraBold-2e5" transform="translate(60 0)"/>
     </g>
    </g>
    <g id="text_14">
@@ -5177,7 +5192,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="p06b26574d9">
+  <clipPath id="p546cf19ed5">
    <rect x="0" y="0" width="1200" height="700"/>
   </clipPath>
  </defs>
